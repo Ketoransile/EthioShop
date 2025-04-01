@@ -1,15 +1,15 @@
 import { FcGoogle } from "react-icons/fc";
-import sideImage from "../../assets/sideImage.svg";
+import sideImage from "../../assets/sideImage.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 export default function LoginPage() {
   return (
-    <div className="flex pt-8  gap-32 items-center">
+    <div className="flex pt-12  gap-32 items-center">
       <Image
         src={sideImage}
-        width={600}
-        height={600}
+        width={500}
+        height={500}
         className=""
         alt="sideImage"
       />
@@ -35,7 +35,7 @@ export default function LoginPage() {
           {/* <button className="bg-red-500 py-2  text-white rounded-md">
             Login
           </button> */}
-          <Button variant="destructive">Login</Button>
+          <Button className="bg-brandBg cursor-pointer">Login</Button>
         </div>
         <p className="text-center">
           Don&apos;t have an account?{" "}

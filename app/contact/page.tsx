@@ -35,7 +35,7 @@ export default function ContactPage() {
           <Input type="text" placeholder="Your Phone*" />
         </div>
         <Textarea placeholder="Type your message here." className="h-40" />
-        <Button variant="destructive" className="self-end cursor-pointer">
+        <Button className="self-end cursor-pointer bg-brandBg">
           Send Message
         </Button>
       </div>

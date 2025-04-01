@@ -3,6 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --color-brandBg: oklch(0.623 0.214 259.815);
+}
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
