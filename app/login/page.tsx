@@ -36,6 +36,12 @@ export default function LoginPage() {
             Login
           </button> */}
           <Button className="bg-brandBg cursor-pointer">Login</Button>
+          <Button variant="outline">
+            <div className="flex items-center gap-2 justify-center">
+              <FcGoogle size={24} />
+              <p>Sign In with Google</p>
+            </div>
+          </Button>
         </div>
         <p className="text-center">
           Don&apos;t have an account?{" "}

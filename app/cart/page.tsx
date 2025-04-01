@@ -1,6 +1,7 @@
 import { CartTable } from "@/components/modular/cart/CartTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 export default function CartPage() {
   return (
@@ -41,7 +42,7 @@ export default function CartPage() {
               <h1 className="text-gray-500">$220.00</h1>
             </div>
             <Button className="bg-brandBg w-full py-2 mt-4">
-              Proceed To Checkout
+              <Link href="/cart/checkout">Proceed To Checkout</Link>
             </Button>
           </div>
         </div>

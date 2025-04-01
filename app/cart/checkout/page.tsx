@@ -25,7 +25,7 @@ export default function CheckoutPage() {
         </div>
       </div>
       <div className="flex flex-col gap-6 ">
-        {productsFromAmazon.slice(20, 24).map((product) => (
+        {/* {productsFromAmazon.slice(20, 24).map((product) => (
           <div
             className="flex max-h-96 overflow-auto gap-4 items-center justify-between border-b border-b-gray-600 pb-6"
             key={product.title}
@@ -44,7 +44,7 @@ export default function CheckoutPage() {
             </div>
             <h1 className="text-sm text-gray-500">${product.price?.value}</h1>
           </div>
-        ))}
+        ))} */}
         <div className="flex flex-col gap-6">
           <div className="flex justify-between py-2 border-b border-b-gray-600">
             <h1 className="text-gray-500">Subtotal</h1>
