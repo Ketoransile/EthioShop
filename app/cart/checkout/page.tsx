@@ -58,7 +58,54 @@ export default function CheckoutPage() {
             <h1 className="text-gray-500">Total</h1>
             <h1 className="text-gray-500">$220.00</h1>
           </div>
-          <Button className="bg-brandBg w-fit py-2 mt-4">Place Order</Button>
+          <div className="flex flex-col gap-6">
+            <form className="flex flex-col gap-6">
+              <h1 className="text-2xl font-semibold">Payment Information</h1>
+              <div className="w-1/3 flex flex-col gap-0.5 px-2  border-2 border-brandBg rounded-md">
+                <Image
+                  src="/credit-card.png"
+                  width={32}
+                  height={32}
+                  alt="mastercard_image"
+                />
+                <h1 className="text-md">Card</h1>
+              </div>
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="name-on-card">Name on Card</Label>
+                  <Input
+                    type="text"
+                    id="name-on-card"
+                    placeholder="First Last"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="card-number">Card Number</Label>
+                  <Input
+                    type="text"
+                    id="card-number"
+                    placeholder="1234 5678 9012 3456"
+                  />
+                </div>
+                <div className=" flex gap-12 items-center justify-between">
+                  <div className="w-1/2 flex flex-col gap-2">
+                    <Label htmlFor="expiry-date">Expiry Date</Label>
+                    <Input type="text" id="expiry-date" placeholder="MM/YY" />
+                  </div>
+                  <div className="flex w-1/2 flex-col gap-2">
+                    <Label htmlFor="cvv">CVV</Label>
+                    <Input type="text" id="cvv" placeholder="123" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div className="flex justify-between items-center w-full ">
+            <Button className="bg-gray-200 text-black w-1/3 py-2 mt-4">
+              Back
+            </Button>
+            <Button className="bg-brandBg w-1/3 py-2 mt-4">Place Order</Button>
+          </div>
         </div>
       </div>
     </div>

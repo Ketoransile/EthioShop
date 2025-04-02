@@ -13,14 +13,14 @@ const MyAccountNavigation = () => {
             <h1 className="font-semibold text-lg">Manage My Account</h1>
             <div className="flex flex-col gap-2 px-8 text-gray-500">
               <Link href="/profile">My Profile</Link>
-              <Link href="/address">My Address</Link>
-              <Link href="/payment">My Payment Options</Link>
+              <Link href="/my-address">My Address</Link>
+              <Link href="/my-payment-option">My Payment Options</Link>
             </div>
           </div>
           <div className="flex flex-col gap-4 ">
             <h1 className="font-semibold text-lg">Manage Orders</h1>
             <div className="flex flex-col gap-2 px-8 text-gray-500">
-              <Link href="/my-returns">My Returns</Link>
+              <Link href="/my-orders">My Orders</Link>
               <Link href="/my-cancellations">My Cancellations</Link>
             </div>
           </div>

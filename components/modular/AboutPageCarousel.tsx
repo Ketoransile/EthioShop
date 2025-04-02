@@ -85,7 +85,7 @@ export function AboutPageCarousel() {
         align: "start",
         loop: true,
       }}
-      className=" pt-20 shadow-2xl "
+      className=" pt-20  "
       // plugins={[plugin.current]}
       // onMouseEnter={plugin.current.stop}
       // onMouseLeave={plugin.current.reset}

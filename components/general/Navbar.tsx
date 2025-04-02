@@ -1,6 +1,25 @@
 import Link from "next/link";
 import { IoSearchOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
+import { FaRegHeart } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
+import { FiUser } from "react-icons/fi";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { NavbarProfileDropdown } from "../modular/NavbarProfileDropdown";
 export const Navbar = () => {
   return (
     <>
@@ -22,9 +41,30 @@ export const Navbar = () => {
             />
             <IoSearchOutline size={24} className="font-normal" />
           </div>
-          <Button variant="default" className="bg-brandBg">
-            <Link href="/sign-up">Sign Up</Link>
-          </Button>
+          <div className="hidden items-center gap-4 ">
+            <Link href="/login" className="">
+              <Button
+                variant="default"
+                className="bg-gray-200 text-black hover:text-white cursor-pointer"
+              >
+                Login
+              </Button>
+            </Link>
+            <Link href="/sign-up" className="">
+              <Button variant="default" className="bg-brandBg cursor-pointer">
+                Sign Up
+              </Button>
+            </Link>
+          </div>
+          <div className="gap-4 items-center justify-between flex">
+            <Link href="/wish-list">
+              <FaRegHeart size={24} className="" />
+            </Link>
+            <Link href="/cart">
+              <IoCartOutline size={28} className="" />
+            </Link>
+            <NavbarProfileDropdown />
+          </div>
         </div>
       </div>
       <div className="border-b border-b-slate-300  -mx-20"></div>

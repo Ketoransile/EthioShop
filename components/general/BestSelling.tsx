@@ -11,8 +11,8 @@ export const BestSellingList = () => {
       </div>
       <h1 className="text-4xl font-semibold">Best Selling Products</h1>
 
-      <div className="grid grid-cols-4 gap-6 gap-y-16 items-center justify-between pt-20">
-        {productsFromAmazon.slice(0, 4).map((product) => (
+      <div className="grid grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
+        {productsFromAmazon.slice(0, 5).map((product) => (
           <ProductCard product={product} key={product.title} />
         ))}
       </div>
