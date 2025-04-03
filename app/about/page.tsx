@@ -11,7 +11,7 @@ export default function AboutPage() {
             <h1 className="text-7xl font-bold">Our Story</h1>
             <div className="flex flex-col gap-2"></div>
             <p className="text-md text-gray-600">
-              Launced in 2015, Ethioshop is Ethiopia&apos;s premier online
+              Launced in 2015, EthioShop is Ethiopia&apos;s premier online
               shopping makterplace with an active presense in Bangladesh.
               Supported by wide range of tailored marketing, data and service
               solutions, Exclusive has 10,500 sallers and 300 brands and serves

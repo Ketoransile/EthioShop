@@ -1,10 +1,13 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { FaTruckFast } from "react-icons/fa6";
 import { GrPowerCycle } from "react-icons/gr";
 import { CiHeart, CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
+import { useCartStore } from "@/store/cart-store";
 const product = {
+  _id: "nkjqbljb3urp1bp19pb139",
   title:
     "TP-Link Tapo Pan/Tilt Security Camera for Baby Monitor, Pet Camera w/Motion Detection, 1080P, 2-Way Audio, Night Vision, Cloud & SD Card Storage, Works with Alexa & Google Home (Tapo C200)",
   description:
@@ -80,6 +83,25 @@ const product = {
 // };
 export default function ProductsDetailPage() {
   const numStars = Math.floor(product.stars) || 0;
+
+  const { items, addItem, removeItem } = useCartStore();
+  const cartItem = items.find((item) => item.id === product._id);
+  const quantity = cartItem ? cartItem.quantity : 0;
+  const onAddItem = () => {
+    addItem({
+      id: product._id,
+      name: product.title,
+      price: product.price?.value || 0,
+      imageUrl: product.highResolutionImages
+        ? product.highResolutionImages[0]
+        : product.thumbnailImage || "",
+      quantity: 1,
+    });
+  };
+  const onRemoveItem = () => {
+    removeItem(product._id);
+  };
+
   return (
     <div className="grid grid-cols-3 gap-12">
       <div className="grid grid-cols-4 gap-20 col-span-2 ">
@@ -133,13 +155,19 @@ export default function ProductsDetailPage() {
         </div>
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center ">
-            <Button className="bg-gray-300 text-black rounded-none rounded-l-xl">
+            <Button
+              onClick={onRemoveItem}
+              className="bg-gray-300 text-black rounded-none rounded-l-xl"
+            >
               -
             </Button>
-            <Button className=" bg-transparent px-4 rounded-none text-black">
-              0
-            </Button>
-            <Button className="bg-brandBg text-white rounded-none rounded-r-xl">
+            {/* <Button className=" bg-transparent px-4 rounded-none text-black"> */}
+            <div className="px-4">{quantity}</div>
+            {/* </Button> */}
+            <Button
+              onClick={onAddItem}
+              className="bg-brandBg text-white rounded-none rounded-r-xl"
+            >
               +
             </Button>
           </div>

@@ -1,4 +1,4 @@
-import { productsFromAmazon } from "@/lib/AmazonDataSet";
+import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
 import { dummyCategories } from "@/lib/dummyData";
 import Link from "next/link";
 import { TbRectangleVerticalFilled } from "react-icons/tb";

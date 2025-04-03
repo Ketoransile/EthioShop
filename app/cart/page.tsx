@@ -1,12 +1,21 @@
+"use client";
 import { CartTable } from "@/components/modular/cart/CartTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useCartStore } from "@/store/cart-store";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function CartPage() {
+  const { items, addItem, removeItem, getTotalPrice, clearCart } =
+    useCartStore();
+  const totalPrice = getTotalPrice();
+  // const cartItem = items.find((item) => item._id === product._id);
   return (
     <div className="flex flex-col gap-16 pt-20">
-      <CartTable />
+      <div className="max-h-96 overflow-y-auto">
+        <CartTable />
+      </div>
       <div className="flex items-center justify-between text-white">
         <Button
           variant="outline"
@@ -15,6 +24,9 @@ export default function CartPage() {
           Return To Shop
         </Button>
         <Button
+          onClick={() => {
+            toast("Cart Updated Successfully");
+          }}
           variant="outline"
           className="w-fit cursor-pointer py-2 px-6 bg-brandBg"
         >
@@ -31,15 +43,15 @@ export default function CartPage() {
             <h1 className="text-black font-bold">Cart Total</h1>
             <div className="flex justify-between py-2 border-b border-b-gray-600">
               <h1 className="text-gray-500">Subtotal</h1>
-              <h1 className="text-gray-500">$200.00</h1>
+              <h1 className="text-gray-500">${totalPrice}</h1>
             </div>
             <div className="flex justify-between py-2 border-b border-b-gray-600">
               <h1 className="text-gray-500">Shipping</h1>
-              <h1 className="text-gray-500">$20.00</h1>
+              <h1 className="text-gray-500">0</h1>
             </div>
             <div className="flex justify-between py-2 ">
               <h1 className="text-gray-500">Total</h1>
-              <h1 className="text-gray-500">$220.00</h1>
+              <h1 className="text-gray-500">${totalPrice}</h1>
             </div>
             <Button className="bg-brandBg w-full py-2 mt-4">
               <Link href="/cart/checkout">Proceed To Checkout</Link>

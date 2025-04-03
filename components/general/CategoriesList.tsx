@@ -10,11 +10,11 @@ export const CategoriesList = () => {
       </div>
       <h1 className="text-4xl font-semibold">Browse By Categories</h1>
 
-      <div className="flex items-center justify-between pt-20">
+      <div className="flex items-center justify-between pt-20 ">
         {dummyCategories.map((category, index) => (
           <Link
             href="/"
-            className="flex flex-col gap-4 w-48 justify-between items-center border border-slate-300 p-10 rounded-md shadow-xl hover:bg-brandBg cursor-pointer"
+            className="flex flex-col gap-4 w-48 justify-between items-center border border-slate-300 p-10 rounded-md shadow-xl hover:bg-brandBg hover:text-white cursor-pointer"
             key={index}
           >
             <category.image size={32} />

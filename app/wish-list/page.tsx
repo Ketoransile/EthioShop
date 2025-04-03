@@ -1,6 +1,6 @@
 import { ProductCard } from "@/components/modular/ProductCard";
 import { Button } from "@/components/ui/button";
-import { productsFromAmazon } from "@/lib/AmazonDataSet";
+import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
 
 export default function WishListPage() {
   return (

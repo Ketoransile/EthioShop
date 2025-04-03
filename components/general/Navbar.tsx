@@ -3,22 +3,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
 import { FaRegHeart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { FiUser } from "react-icons/fi";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { NavbarProfileDropdown } from "../modular/NavbarProfileDropdown";
 export const Navbar = () => {
   return (

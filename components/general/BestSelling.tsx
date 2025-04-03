@@ -1,6 +1,6 @@
 import { dummyCategories } from "@/lib/dummyData";
 import { TbRectangleVerticalFilled } from "react-icons/tb";
-import { productsFromAmazon } from "@/lib/AmazonDataSet";
+import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
 import { ProductCard } from "../modular/ProductCard";
 export const BestSellingList = () => {
   return (

@@ -1,55 +1,108 @@
+"use client";
 import { FcGoogle } from "react-icons/fc";
 import sideImage from "../../../assets/sideImage.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-export default function LoginPage() {
-  return (
-    <div className="flex pt-12  gap-32 items-center">
-      <Image
-        src={sideImage}
-        width={500}
-        height={500}
-        className=""
-        alt="sideImage"
-      />
-      <div className="flex flex-col gap-6 w-1/4 ">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold">
-            Login to Ethio<span className="text-blue-600">shop</span>
-          </h1>
-          <p className="text-sm">Enter your details below</p>
-        </div>
+import { Input } from "@/components/ui/input";
 
-        <input
-          type="email"
-          placeholder="Email"
-          className=" focus:outline-none border-b border-b-gray-500"
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+export default function LoginPage() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+  }
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex pt-12  gap-32 items-center"
+      >
+        <Image
+          src={sideImage}
+          width={500}
+          height={500}
+          className=""
+          alt="sideImage"
         />
-        <input
-          type="password"
-          placeholder="Password"
-          className=" focus:outline-none border-b border-b-gray-500"
-        />
-        <div className="flex flex-col gap-2">
-          {/* <button className="bg-red-500 py-2  text-white rounded-md">
+        <div className="flex flex-col gap-6 w-1/4 ">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-2xl font-bold">
+              Login to Ethio<span className="text-blue-600">Shop</span>
+            </h1>
+            <p className="text-sm">Enter your details below</p>
+          </div>
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input placeholder="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex flex-col gap-2">
+            {/* <button className="bg-red-500 py-2  text-white rounded-md">
             Login
-          </button> */}
-          <Button className="bg-brandBg cursor-pointer">Login</Button>
-          <Button variant="outline">
-            <div className="flex items-center gap-2 justify-center">
-              <FcGoogle size={24} />
-              <p>Sign In with Google</p>
-            </div>
-          </Button>
+            </button> */}
+            <Button type="submit" className="bg-brandBg cursor-pointer">
+              Login
+            </Button>
+            <Button variant="outline">
+              <div className="flex items-center gap-2 justify-center">
+                <FcGoogle size={24} />
+                <p>Sign In with Google</p>
+              </div>
+            </Button>
+          </div>
+          <p className="text-center">
+            Don&apos;t have an account?{" "}
+            <Link href="sign-up" className="border-b-2 border-b-gray-600">
+              Signup
+            </Link>
+          </p>
         </div>
-        <p className="text-center">
-          Don&apos;t have an account?{" "}
-          <Link href="sign-up" className="border-b-2 border-b-gray-600">
-            Signup
-          </Link>
-        </p>
-      </div>
-    </div>
+      </form>
+    </Form>
   );
 }

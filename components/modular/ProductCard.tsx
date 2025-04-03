@@ -1,9 +1,15 @@
+"use client";
 import Image from "next/image";
 import { CiHeart } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { Button } from "../ui/button";
+import { useCartStore } from "@/store/cart-store";
+import { toast } from "sonner";
+
 export const ProductCard = ({ product }) => {
+  const { items, removeItem, addItem } = useCartStore();
+  const cartItem = items.find((item) => item.id === product._id);
   const numStars = Math.floor(product.stars) || 0;
   const listPrice = product.listPrice?.value || 0;
   const price = product.price?.value || 0;
@@ -13,6 +19,7 @@ export const ProductCard = ({ product }) => {
   const truncateTitle = (title: string): string => {
     return title.length > 30 ? title.substring(0, 20) + "..." : title;
   };
+
   return (
     <div className="w-full flex flex-col ">
       <div className="relative py-6  flex items-center justify-center    bg-gray-100">
@@ -55,9 +62,35 @@ export const ProductCard = ({ product }) => {
         </div>
       </div>
 
-      <Button className="bg-brandBg hover:bg-blue-400  py-2 text-white rounded-none  cursor-pointer">
-        <p className="text-white text-center font-bold ">Add to cart</p>
-      </Button>
+      {cartItem ? (
+        <Button
+          onClick={() => {
+            removeItem(product._id);
+            toast.error("Item removed from cart.");
+          }}
+          className="bg-black hover:bg-gray-800  py-2 text-white rounded-none  cursor-pointer"
+        >
+          <p className="text-white text-center font-bold ">Remove from cart</p>
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            addItem({
+              id: product._id,
+              name: product.title,
+              price: product.price?.value || 0,
+              imageUrl: product.highResolutionImages
+                ? product.highResolutionImages[0]
+                : product.thumbnailImage || "",
+              quantity: 1,
+            });
+            toast("Item added to cart!");
+          }}
+          className="bg-brandBg hover:bg-blue-400  py-2 text-white rounded-none  cursor-pointer"
+        >
+          <p className="text-white text-center font-bold ">Add to cart</p>
+        </Button>
+      )}
     </div>
   );
 };
