@@ -1,20 +1,14 @@
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { connectDB as client } from "./db";
+import { nextCookies } from "better-auth/next-js";
+import connectDBNative from "./dbNative";
 
-async function getDbInstance() {
-  const db = await client();
-  return db;
-}
+const client = await connectDBNative();
+
 export const auth = betterAuth({
-  database: mongodbAdapter(await getDbInstance()),
+  database: mongodbAdapter(client),
   emailAndPassword: {
     enabled: true,
   },
-  socialProviders: {
-    github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-    },
-  },
+  plugins: [nextCookies()],
 });

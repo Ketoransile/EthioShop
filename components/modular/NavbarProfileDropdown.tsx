@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { LuShoppingBag } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
@@ -18,8 +19,22 @@ import {
 import Link from "next/link";
 import { FiUser } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
-
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 export function NavbarProfileDropdown() {
+  const router = useRouter();
+  const handleLogout = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          toast.success("Logout successful");
+          router.push("/login"); // redirect to login page
+        },
+      },
+    });
+  };
+
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
@@ -67,10 +82,13 @@ export function NavbarProfileDropdown() {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
-          <Link href="#" className="flex items-center gap-4 cursor-pointer">
+          <Button
+            onClick={handleLogout}
+            className="flex items-start justify-start gap-4 cursor-pointer bg-transparent text-black border-none w-full "
+          >
             <TbLogout2 size={24} />
             <p>Logout</p>
-          </Link>
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

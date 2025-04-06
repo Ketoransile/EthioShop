@@ -5,15 +5,22 @@ import { HomePageFeatured } from "@/components/general/HomePageFeatured";
 import HomePageFeaturesList from "@/components/general/HomePageFeaturesList";
 import { HomePageProductsList } from "@/components/general/HomePageProductsList";
 import { HomePageMusic } from "@/components/modular/HomePageMusic";
+import BestSellingSkeleton from "@/components/skeletons/BestSellingSkeleton";
+import HomePageProductsListSekeleton from "@/components/skeletons/HomePageProductsListSekeleton";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
     <>
       <HeroSlider />
       <CategoriesList />
-      <BestSellingList />
+      <Suspense fallback={<BestSellingSkeleton />}>
+        <BestSellingList />
+      </Suspense>
       <HomePageMusic />
-      <HomePageProductsList />
+      <Suspense fallback={<HomePageProductsListSekeleton />}>
+        <HomePageProductsList />
+      </Suspense>
       <HomePageFeatured />
       <HomePageFeaturesList />
     </>

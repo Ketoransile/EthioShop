@@ -20,10 +20,11 @@ import {
 } from "@/components/ui/form";
 
 import { authClient } from "@/lib/auth-client"; //import the auth client
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import User from "@/models/User";
-import { connectDB } from "@/lib/db";
+import { connectDB } from "@/lib/dbNative";
+import { useState } from "react";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -31,6 +32,9 @@ const formSchema = z.object({
   password: z.string().min(8),
 });
 export default function SignUp() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,34 +45,45 @@ export default function SignUp() {
   });
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await connectDB();
-      const { data, error } = await authClient.signUp.email({
-        email: values.email,
-        name: values.email,
-        password: values.password,
-        callbackURL: "/",
-      });
-      if (error) {
-        throw new Error(error.message);
-      }
-      if (data) {
-        const existingUser = await User.findOne({ email: values.email });
-        if (!existingUser) {
-          await User.create({
-            username: values.username,
-            email: values.email,
-            cartItems: {},
-          });
+      setIsLoading(true);
+      const { data, error } = await authClient.signUp.email(
+        {
+          email: values.email,
+          password: values.password,
+          name: values.username,
+          callbackURL: "/",
+        },
+        {
+          onRequest: () => {
+            toast.success("Processing your signup...");
+          },
+          onSuccess: () => {
+            router.push("/");
+            toast.success("Account created successfully! Redirecting...");
+          },
+          onError: (ctx) => {
+            console.log("Full error context:", ctx);
+
+            const errorMessage =
+              ctx.error?.message ||
+              ctx.error?.toString() ||
+              "Signup failed. Please try again.";
+
+            toast.error(errorMessage);
+          },
         }
+      );
+
+      if (error) {
+        throw new Error(error.message || "Signup failed");
       }
-      toast.success("Signed up successfully!!");
-    } catch (error) {
-      toast.error("Signup Failed. Please try again");
-      console.error("Signup error: ", error.mesasge);
-      alert(error.message);
+    } catch (err: any) {
+      toast.error(err.message || "An unexpected error occurred");
+      console.error("Signup error:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
-
   return (
     <Form {...form}>
       <form
@@ -131,8 +146,12 @@ export default function SignUp() {
             {/* <button className="bg-red-500 py-2  text-white rounded-md">
             Create Account
           </button> */}
-            <Button type="submit" className="bg-brandBg cursor-pointer">
-              Create Account
+            <Button
+              type="submit"
+              className="bg-brandBg cursor-pointer disabled:bg-blue-400"
+              disabled={isLoading}
+            >
+              {isLoading ? "Please Wait..." : "Create Account"}
             </Button>
             <Button variant="outline">
               <div className="flex items-center gap-2 justify-center">

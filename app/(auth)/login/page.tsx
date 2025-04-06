@@ -18,12 +18,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
+import { useState } from "react";
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 });
 
 export default function LoginPage() {
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,8 +35,37 @@ export default function LoginPage() {
       password: "",
     },
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      setIsLoading(true);
+      const { data, error } = await authClient.signIn.email(
+        {
+          email: values.email,
+
+          password: values.password,
+
+          callbackURL: "/",
+          /**
+           * remember the user session after the browser is closed.
+          @default true
+           */
+          rememberMe: false,
+        },
+        {
+          //callbacks
+        }
+      );
+      if (error) {
+        toast.error(error.message || "Sign in Failed. Please try again.");
+        return;
+      }
+      toast.success("Signed in successfully. Redirecting....");
+    } catch (error) {
+      toast.error("An unexpected error occurred. Please try again.");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
   return (
     <Form {...form}>
@@ -85,8 +118,13 @@ export default function LoginPage() {
             {/* <button className="bg-red-500 py-2  text-white rounded-md">
             Login
             </button> */}
-            <Button type="submit" className="bg-brandBg cursor-pointer">
-              Login
+
+            <Button
+              type="submit"
+              className="bg-brandBg cursor-pointer disabled:bg-blue-400"
+              disabled={isLoading}
+            >
+              {isLoading ? "Please wait..." : "Login"}
             </Button>
             <Button variant="outline">
               <div className="flex items-center gap-2 justify-center">

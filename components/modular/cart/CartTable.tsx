@@ -47,12 +47,17 @@ export function CartTable() {
 }
 
 function CartTableRow({ item }: { item: CartItem }) {
+  const { items, addItem, removeItem, getTotalPrice, clearCart } =
+    useCartStore();
   const { updateItemQuantity } = useCartStore();
   const [quantity, setQuantity] = useState(item.quantity);
   const subTotal = parseFloat((item.price * item.quantity).toFixed(2));
   const onQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = Math.max(0, parseInt(e.target.value) || 1);
+    const newQuantity = Math.max(0, parseInt(e.target.value) || 0);
     setQuantity(newQuantity);
+    if (newQuantity === 0) {
+      removeItem(item.id);
+    }
     updateItemQuantity(item.id, newQuantity);
   };
   return (
