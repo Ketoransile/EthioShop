@@ -1,3 +1,4 @@
+const revalidate: number = 60;
 import { dummyCategories } from "@/lib/dummyData";
 import { TbRectangleVerticalFilled } from "react-icons/tb";
 import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
@@ -9,27 +10,21 @@ import { auth } from "@/lib/auth";
 import { cookies, headers } from "next/headers";
 import { toast } from "sonner";
 async function fetchBestSellings() {
-  const session = await auth.api.getSession({
-    headers: await headers(), // you need to pass the headers object.
-  });
-  if (!session) {
-    toast.error("Unauthorized");
-    return null;
-  }
-  // console.log("Session from bestesling srver component is :  ", session);
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const response = await fetch(`${baseUrl}/api/products/list`, {
     method: "GET",
-    cache: "no-store",
+    next: { revalidate: revalidate },
     headers: {
       "Content-Type": "application/json",
     },
   });
+  // console.log(response);
   if (!response.ok) {
     console.error("Error while fetching products");
     return null;
   }
   const data = await response.json();
+  // console.log("data from bessellinf: 0", data);
   return data;
 }
 
@@ -40,7 +35,7 @@ export const BestSellingList = async () => {
   // });
 
   // console.log("Session from bestselling handler:", session);
-  if (data.status === 404 || data.data === null) {
+  if (data.status === 404 || data.status === 500 || data.data === null) {
     return <p>No products found</p>;
   }
   const products = data.data;

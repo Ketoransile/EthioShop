@@ -7,7 +7,16 @@ import { IoCartOutline } from "react-icons/io5";
 
 import { NavbarProfileDropdown } from "../modular/NavbarProfileDropdown";
 import { authClient } from "@/lib/auth-client";
+import { useCartStore } from "@/store/cart-store";
+import { useWishStore } from "@/store/wishlist-store";
 export const Navbar = () => {
+  const { items } = useCartStore();
+  const { wishItems } = useWishStore();
+  const numberOfWishItems = wishItems.reduce((total) => total + 1, 0);
+  const numberOfCartItems = items.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
   console.log("Navbar rendered");
   const {
     data: session,
@@ -39,13 +48,32 @@ export const Navbar = () => {
             <IoSearchOutline size={24} className="font-normal" />
           </div>
           {session ? (
-            <div className="gap-4 items-center justify-between flex">
-              <Link href="/wish-list">
+            // <div className="gap-4 items-center justify-between flex">
+            <div className="gap-6 items-center justify-between flex">
+              {/* <Link href="/wish-list">
                 <FaRegHeart size={24} className="" />
-              </Link>
-              <Link href="/cart">
-                <IoCartOutline size={28} className="" />
-              </Link>
+              </Link> */}
+              <div className="relative">
+                <Link href="/wish-list">
+                  <FaRegHeart size={28} className="" />
+                  {numberOfWishItems > 0 && (
+                    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                      {numberOfWishItems}
+                    </span>
+                  )}
+                </Link>
+              </div>
+              <div className="relative">
+                <Link href="/cart">
+                  <IoCartOutline size={28} />
+                  {numberOfCartItems > 0 && (
+                    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                      {numberOfCartItems}
+                    </span>
+                  )}
+                </Link>
+              </div>
+
               <NavbarProfileDropdown />
             </div>
           ) : (

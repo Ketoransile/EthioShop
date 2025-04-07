@@ -31,7 +31,7 @@ export const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="relative w-full flex flex-col  hover:drop-shadow-sm hover:shadow-blue-500 border-b rounded-xl border-gray-100 shadow-md  shadow-gray-200">
+    <div className="relative w-full flex flex-col  hover:drop-shadow-sm hover:shadow-blue-500 border-b rounded-xl border-gray-100 hover:border-none shadow-md  shadow-gray-200">
       <Link
         href={`/products/${product._id}`}
         // className="hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"

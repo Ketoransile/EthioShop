@@ -1,3 +1,4 @@
+const revalidate = 60;
 import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
 import { dummyCategories } from "@/lib/dummyData";
 import Link from "next/link";
@@ -11,7 +12,7 @@ async function fetchHomePageProducts() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const response = await fetch(`${baseUrl}/api/products/list`, {
     method: "GET",
-    cache: "no-store",
+    next: { revalidate: revalidate },
     headers: {
       "Content-Type": "application/json",
     },
@@ -28,7 +29,7 @@ async function fetchHomePageProducts() {
 
 export const HomePageProductsList = async () => {
   const data = await fetchHomePageProducts();
-  if (data.status === 404 || data.data === null) {
+  if (data.status === 404 || data.status === 500 || data.data === null) {
     return <div className="">No Products found</div>;
   }
   const products = data.data;

@@ -83,7 +83,7 @@ function CartTableRow({ item }: { item: CartItem }) {
           className="max-w-20 max-h-20 [&::-webkit-inner-spin-button]:opacity-100"
         />
       </TableCell>
-      <TableCell>{subTotal}</TableCell>
+      <TableCell>${subTotal}</TableCell>
     </TableRow>
   );
 }

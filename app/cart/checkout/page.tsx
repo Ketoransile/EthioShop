@@ -1,10 +1,15 @@
+"use client";
+import { AddAddressTab } from "@/components/modular/cart/AddAddressTab";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
+import { useCartStore } from "@/store/cart-store";
 import Image from "next/image";
 
 export default function CheckoutPage() {
+  const { getTotalPrice } = useCartStore();
+  const subTotal = getTotalPrice();
   return (
     <div className="grid grid-cols-2 gap-12 pt-20">
       <div className="w-2/3 flex flex-col gap-8">
@@ -60,15 +65,15 @@ export default function CheckoutPage() {
         <div className="flex flex-col gap-6">
           <div className="flex justify-between py-2 border-b border-b-gray-400">
             <h1 className="">Subtotal</h1>
-            <h1 className="">$200.00</h1>
+            <h1 className="">${subTotal}</h1>
           </div>
           <div className="flex justify-between py-2 border-b border-b-gray-400">
             <h1 className="">Shipping</h1>
-            <h1 className="">$20.00</h1>
+            <h1 className="">Free</h1>
           </div>
           <div className="flex justify-between py-2 ">
             <h1 className="font-bold">Total</h1>
-            <h1 className="font-bold">$220.00</h1>
+            <h1 className="font-bold">${subTotal}</h1>
           </div>
           <div className="flex flex-col gap-6">
             <form className="flex flex-col gap-6">
@@ -120,6 +125,7 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+      <AddAddressTab />
     </div>
   );
 }

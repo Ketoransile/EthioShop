@@ -23,6 +23,7 @@ export const config = {
     "/my-payment-option",
     "/cart",
     "/cart/checkout",
+    "/checkout",
     "/wish-list",
     "/products",
     "/products/:productId",

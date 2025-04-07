@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { useCartStore } from "@/store/cart-store";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
 export default function CartPage() {
@@ -20,6 +21,9 @@ export default function CartPage() {
       </div>
       <div className="flex items-center justify-between text-white">
         <Button
+          onClick={() => {
+            redirect("/products");
+          }}
           variant="outline"
           className="w-fit py-2 px-6 bg-red-500 cursor-pointer"
         >
@@ -56,7 +60,7 @@ export default function CartPage() {
               <h1 className="text-gray-500">${totalPrice}</h1>
             </div>
             <Button className="bg-brandBg w-full py-2 mt-4 cursor-pointer">
-              <Link href="/cart/checkout">Proceed To Checkout</Link>
+              <Link href="/checkout">Proceed To Checkout</Link>
             </Button>
           </div>
         </div>

@@ -27,7 +27,7 @@ interface IProduct extends Document {
   inStock: boolean;
 }
 export default function ProductsDetailPage({ product }: { product: IProduct }) {
-  const numStars = Math.floor(product.stars) || 0;
+  const numStars = Math.floor(product?.stars) || 0;
 
   const { items, addItem, removeItem } = useCartStore();
   const cartItem = items.find((item) => item.id === product._id);
