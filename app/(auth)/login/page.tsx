@@ -38,6 +38,8 @@ export default function LoginPage() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true);
+      console.log("Auth base URL:", process.env.NEXT_PUBLIC_BETTER_AUTH_URL);
+
       const { error } = await authClient.signIn.email(
         {
           email: values.email,
