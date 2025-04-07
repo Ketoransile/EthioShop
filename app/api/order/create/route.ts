@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
       });
     }
     await connectDB();
-    const;
-  } catch (error) {}
+    // const;
+  } catch (error) {
+    console.error(error);
+  }
 }
