@@ -28,7 +28,7 @@ async function fetchHomePageProducts() {
     return data;
   } catch (error) {
     console.error(error);
-    return;
+    return [];
   }
 }
 

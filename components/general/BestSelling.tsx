@@ -28,7 +28,7 @@ async function fetchBestSellings() {
     return data;
   } catch (error) {
     console.error(error);
-    return;
+    return [];
   }
   // console.log("data from bessellinf: 0", data);
 }
