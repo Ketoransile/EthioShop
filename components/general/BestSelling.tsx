@@ -23,7 +23,7 @@ async function fetchBestSellings() {
     // console.log(response);
     if (!response.ok) {
       const status = response.status;
-      console.error(`Failed to fetch products. Status: ${status}`);
+      console.error(`Failed to fetch products.  Status: ${status}`);
       return {
         status,
         data: null,
