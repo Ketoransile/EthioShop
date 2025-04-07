@@ -3,8 +3,14 @@ import { headers } from "next/headers";
 import { auth } from "./lib/auth";
 import { getSessionCookie } from "better-auth/cookies";
 export async function middleware(request: NextRequest) {
-  const sessionToken = request.cookies.get("better-auth.session_token")?.value;
+  // const sessionToken = request.cookies.get("better-auth.session_token")?.value;
 
+  const secureCookie = request.cookies.get(
+    "__Secure-better-auth.session_token"
+  )?.value;
+  const localCookie = request.cookies.get("better-auth.session_token")?.value;
+
+  const sessionToken = secureCookie ?? localCookie;
   console.log("Session token from cookie:", sessionToken);
 
   if (!sessionToken) {
