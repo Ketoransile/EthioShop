@@ -1,4 +1,4 @@
-const revalidate = 60;
+// const revalidate = 60;
 // import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
 // import { dummyCategories } from "@/lib/dummyData";
 import Link from "next/link";
@@ -13,30 +13,45 @@ async function fetchHomePageProducts() {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const response = await fetch(`${baseUrl}/api/products/list`, {
       method: "GET",
-      next: { revalidate: revalidate },
+      cache: "no-store",
+      // next: { revalidate: revalidate },
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
     });
     if (!response.ok) {
-      console.error("Error occurred while fetching products");
-      return null;
+      const status = response.status;
+      console.error(`Failed to fetch products. Status: ${status}`);
+      return {
+        status,
+        data: null,
+        error: `Request failed with status ${status}`,
+      };
     }
     const data = await response.json();
     // console.log("data from backnd converted using ,json method is :", data);
     return data;
   } catch (error) {
-    console.error(error);
-    return [];
+    console.error("Fetch error:", error);
+    return {
+      status: 500,
+      data: null,
+      error: error.message || "Unknown error",
+    };
   }
 }
 
 export const HomePageProductsList = async () => {
   const data = await fetchHomePageProducts();
-  if (data.status === 404 || data.status === 500 || data.data === null) {
+  console.log("Data from hompaegproduct list", data);
+  // if (data.status === 404 || data.status === 500 || data.data === null) {
+  //   return <div className="">No Products found</div>;
+  // }
+  if (data.status !== 200 || !data.data || data.data.length === 0) {
     return <div className="">No Products found</div>;
   }
+
   const products = data.data;
   return (
     <div className="flex flex-col gap-4 pt-20">

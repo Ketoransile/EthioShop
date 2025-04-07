@@ -1,4 +1,4 @@
-const revalidate: number = 60;
+// const revalidate: number = 60;
 // import { dummyCategories } from "@/lib/dummyData";
 import { TbRectangleVerticalFilled } from "react-icons/tb";
 // import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
@@ -14,21 +14,31 @@ async function fetchBestSellings() {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const response = await fetch(`${baseUrl}/api/products/list`, {
       method: "GET",
-      next: { revalidate: revalidate },
+      // next: { revalidate: revalidate },
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
       },
     });
     // console.log(response);
     if (!response.ok) {
-      console.error("Error while fetching products");
-      return null;
+      const status = response.status;
+      console.error(`Failed to fetch products. Status: ${status}`);
+      return {
+        status,
+        data: null,
+        error: `Request failed with status ${status}`,
+      };
     }
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
-    return [];
+    console.error("Fetch error:", error);
+    return {
+      status: 500,
+      data: null,
+      error: error.message || "Unknown error",
+    };
   }
   // console.log("data from bessellinf: 0", data);
 }
@@ -40,8 +50,16 @@ export const BestSellingList = async () => {
   // });
 
   // console.log("Session from bestselling handler:", session);
-  if (data.status === 404 || data.status === 500 || data.data === null) {
-    return <p>No products found</p>;
+  // if (
+  //   !data ||
+  //   data.status === 404 ||
+  //   data.status === 500 ||
+  //   data.data === null
+  // ) {
+  //   return <p>No products found</p>;
+  // }
+  if (data.status !== 200 || !data.data || data.data.length === 0) {
+    return <div className="">No Products found</div>;
   }
   const products = data.data;
 
