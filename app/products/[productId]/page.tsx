@@ -4,24 +4,29 @@ import Link from "next/link";
 // import { Suspense } from "react";
 
 async function getProduct(productId: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const res = await fetch(`${baseUrl}/api/products/${productId}`, {
-    method: "GET",
-    cache: "no-store",
-    // credentials: "include",d
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await res.json();
-  // console.log("Response from getProduct function", data);
-  if (!res.ok) {
-    console.error("Error occurred while fetching a product");
-    return null;
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/products/${productId}`, {
+      method: "GET",
+      cache: "no-store",
+      // credentials: "include",d
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    // console.log("Response from getProduct function", data);
+    if (!res.ok) {
+      console.error("Error occurred while fetching a product");
+      return null;
+    }
+    // const data = await res.json();
+    // console.log("Product response from getProduct function", data);
+    return data; // Return just the data, not the entire Axios response
+  } catch (error) {
+    console.error(error);
+    return;
   }
-  // const data = await res.json();
-  // console.log("Product response from getProduct function", data);
-  return data; // Return just the data, not the entire Axios response
 }
 export default async function Page({
   params,

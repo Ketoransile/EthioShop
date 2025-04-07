@@ -8,23 +8,28 @@ import { Button } from "../ui/button";
 import connectDB from "@/lib/db";
 
 async function fetchHomePageProducts() {
-  await connectDB();
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/products/list`, {
-    method: "GET",
-    next: { revalidate: revalidate },
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-  });
-  if (!response.ok) {
-    console.error("Error occurred while fetching products");
-    return null;
+  try {
+    await connectDB();
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const response = await fetch(`${baseUrl}/api/products/list`, {
+      method: "GET",
+      next: { revalidate: revalidate },
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    if (!response.ok) {
+      console.error("Error occurred while fetching products");
+      return null;
+    }
+    const data = await response.json();
+    // console.log("data from backnd converted using ,json method is :", data);
+    return data;
+  } catch (error) {
+    console.error(error);
+    return;
   }
-  const data = await response.json();
-  // console.log("data from backnd converted using ,json method is :", data);
-  return data;
 }
 
 export const HomePageProductsList = async () => {

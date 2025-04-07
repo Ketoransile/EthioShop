@@ -10,22 +10,27 @@ import { ProductCard } from "../modular/ProductCard";
 // import { cookies, headers } from "next/headers";
 // import { toast } from "sonner";
 async function fetchBestSellings() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/products/list`, {
-    method: "GET",
-    next: { revalidate: revalidate },
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  // console.log(response);
-  if (!response.ok) {
-    console.error("Error while fetching products");
-    return null;
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const response = await fetch(`${baseUrl}/api/products/list`, {
+      method: "GET",
+      next: { revalidate: revalidate },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // console.log(response);
+    if (!response.ok) {
+      console.error("Error while fetching products");
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return;
   }
-  const data = await response.json();
   // console.log("data from bessellinf: 0", data);
-  return data;
 }
 
 export const BestSellingList = async () => {
