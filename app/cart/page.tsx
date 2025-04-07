@@ -2,15 +2,14 @@
 import { CartTable } from "@/components/modular/cart/CartTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
+// import { authClient } from "@/lib/auth-client";
 import { useCartStore } from "@/store/cart-store";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
 export default function CartPage() {
-  const { items, addItem, removeItem, getTotalPrice, clearCart } =
-    useCartStore();
+  const { getTotalPrice } = useCartStore();
   const totalPrice = getTotalPrice();
   // const cartItem = items.find((item) => item._id === product._id);
 

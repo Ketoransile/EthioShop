@@ -1,5 +1,5 @@
 import { TbRectangleVerticalFilled } from "react-icons/tb";
-import { Skeleton } from "../ui/skeleton";
+// import { Skeleton } from "../ui/skeleton";
 import { ProductCardSkeleton } from "./ProductCardSkeleton";
 
 export default function BestSellingSkeleton() {

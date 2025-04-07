@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -38,7 +38,7 @@ export default function LoginPage() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true);
-      const { data, error } = await authClient.signIn.email(
+      const { error } = await authClient.signIn.email(
         {
           email: values.email,
 

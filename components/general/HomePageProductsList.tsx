@@ -1,6 +1,6 @@
 const revalidate = 60;
-import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
-import { dummyCategories } from "@/lib/dummyData";
+// import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
+// import { dummyCategories } from "@/lib/dummyData";
 import Link from "next/link";
 import { TbRectangleVerticalFilled } from "react-icons/tb";
 import { ProductCard } from "../modular/ProductCard";

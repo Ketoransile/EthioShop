@@ -1,7 +1,7 @@
 import ProductsDetailPage from "@/components/general/ProductDetailPage";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Suspense } from "react";
+// import { Suspense } from "react";
 
 async function getProduct(productId: string) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";

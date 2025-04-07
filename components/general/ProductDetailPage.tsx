@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { FaTruckFast } from "react-icons/fa6";
 import { GrPowerCycle } from "react-icons/gr";
-import { CiHeart, CiStar } from "react-icons/ci";
+import { CiHeart } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { useCartStore } from "@/store/cart-store";
 
-import { use } from "react";
+// import { use } from "react";
 import { Document } from "mongoose";
 interface Price {
   value: number;

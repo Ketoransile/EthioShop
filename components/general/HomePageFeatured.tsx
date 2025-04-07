@@ -1,11 +1,11 @@
 import { TbRectangleVerticalFilled } from "react-icons/tb";
-import headset1 from "../../assets/headset1.jpg";
-import headset from "../../assets/headset.jpg";
-import laptop1 from "../../assets/laptop1.jpg";
-import iphone from "../../assets/iphone.jpg";
+// import headset1 from "../../assets/headset1.jpg";
+// import headset from "../../assets/headset.jpg";
+// import laptop1 from "../../assets/laptop1.jpg";
+// import iphone from "../../assets/iphone.jpg";
 import asus from "../../assets/computers/asus.jpg";
 import samsung from "../../assets/computers/samsung.jpg";
-import headsetone from "../../assets/headphone/headsetone.jpg";
+// import headsetone from "../../assets/headphone/headsetone.jpg";
 import iphone1 from "../../assets/phones/iphone1.jpg";
 import galaxywatch1 from "../../assets/smartwatch/galaxywatch1.jpg";
 import Image from "next/image";

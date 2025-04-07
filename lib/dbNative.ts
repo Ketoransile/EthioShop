@@ -192,7 +192,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config({ path: "../.env" });
 
-const globalAny = global as any;
+const globalAny = global;
 
 let client: MongoClient | null = globalAny.mongoClient || null;
 

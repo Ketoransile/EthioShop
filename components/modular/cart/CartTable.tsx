@@ -2,9 +2,9 @@ import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
-  TableCaption,
+  // TableCaption,
   TableCell,
-  TableFooter,
+  // TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -14,8 +14,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export function CartTable() {
-  const { items, addItem, removeItem, getTotalPrice, clearCart } =
-    useCartStore();
+  const { items } = useCartStore();
 
   return (
     <Table>
@@ -47,8 +46,7 @@ export function CartTable() {
 }
 
 function CartTableRow({ item }: { item: CartItem }) {
-  const { items, addItem, removeItem, getTotalPrice, clearCart } =
-    useCartStore();
+  const { removeItem } = useCartStore();
   const { updateItemQuantity } = useCartStore();
   const [quantity, setQuantity] = useState(item.quantity);
   const subTotal = parseFloat((item.price * item.quantity).toFixed(2));

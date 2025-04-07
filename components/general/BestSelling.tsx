@@ -1,14 +1,14 @@
 const revalidate: number = 60;
-import { dummyCategories } from "@/lib/dummyData";
+// import { dummyCategories } from "@/lib/dummyData";
 import { TbRectangleVerticalFilled } from "react-icons/tb";
-import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
+// import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
 import { ProductCard } from "../modular/ProductCard";
-import { Suspense, useEffect } from "react";
-import { ProductCardSkeleton } from "../skeletons/ProductCardSkeleton";
-import { authClient } from "@/lib/auth-client";
-import { auth } from "@/lib/auth";
-import { cookies, headers } from "next/headers";
-import { toast } from "sonner";
+// import { Suspense, useEffect } from "react";
+// import { ProductCardSkeleton } from "../skeletons/ProductCardSkeleton";
+// import { authClient } from "@/lib/auth-client";
+// import { auth } from "@/lib/auth";
+// import { cookies, headers } from "next/headers";
+// import { toast } from "sonner";
 async function fetchBestSellings() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const response = await fetch(`${baseUrl}/api/products/list`, {

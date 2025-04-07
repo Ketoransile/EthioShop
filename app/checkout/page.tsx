@@ -1,10 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// import { Label } from "@/components/ui/label";
 import { useCartStore } from "@/store/cart-store";
-import Image from "next/image";
-import { redirect } from "next/navigation";
+// import Image from "next/image";
+// import { redirect } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -12,7 +12,7 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -50,7 +50,7 @@ export const formSchema = z.object({
 });
 export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
-  const { items, clearCart, getTotalPrice } = useCartStore();
+  const { items, getTotalPrice } = useCartStore();
   const subTotal = getTotalPrice();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({

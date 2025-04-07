@@ -1,7 +1,7 @@
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import connectDB from "@/lib/db";
 import Product from "@/models/Product";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(

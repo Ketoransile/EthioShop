@@ -5,7 +5,7 @@ import { useWishStore } from "@/store/wishlist-store";
 import { TbRectangleVerticalFilled } from "react-icons/tb";
 
 export default function WishListPage() {
-  const { wishItems, addToWish, removeFromWish } = useWishStore();
+  const { wishItems } = useWishStore();
   const numOfWishList = wishItems.length;
   return (
     <div className="flex flex-col pt-20 gap-20">

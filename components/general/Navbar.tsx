@@ -20,9 +20,9 @@ export const Navbar = () => {
   console.log("Navbar rendered");
   const {
     data: session,
-    isPending, //loading state
-    error, //error object
-    refetch, //refetch the session
+    // isPending, //loading state
+    // error, //error object
+    // refetch, //refetch the session
   } = authClient.useSession();
   if (session) {
     console.log("session from navbar is:", session);

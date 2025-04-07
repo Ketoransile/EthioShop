@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,10 +20,10 @@ import {
 } from "@/components/ui/form";
 
 import { authClient } from "@/lib/auth-client"; //import the auth client
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import User from "@/models/User";
-import { connectDB } from "@/lib/dbNative";
+// import User from "@/models/User";
+// import { connectDB } from "@/lib/dbNative";
 import { useState } from "react";
 
 const formSchema = z.object({
@@ -46,7 +46,7 @@ export default function SignUp() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
-      const { data, error } = await authClient.signUp.email(
+      const { error } = await authClient.signUp.email(
         {
           email: values.email,
           password: values.password,
@@ -77,7 +77,7 @@ export default function SignUp() {
       if (error) {
         throw new Error(error.message || "Signup failed");
       }
-    } catch (err: any) {
+    } catch (err) {
       toast.error(err.message || "An unexpected error occurred");
       console.error("Signup error:", err);
     } finally {

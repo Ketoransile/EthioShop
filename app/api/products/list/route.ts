@@ -1,10 +1,10 @@
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import connectDB from "@/lib/db";
 import Product from "@/models/Product";
-import { cookies, headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+// import { cookies, headers } from "next/headers";
+import { NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     await connectDB();
     const products = await Product.find({});
