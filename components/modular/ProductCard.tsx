@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { useWishStore } from "@/store/wishlist-store";
+// import { useWishStore } from "@/store/wishlist-store";
 import FavouriteHeartButton from "./FavouriteHeartButton";
 
 export const ProductCard = ({ product }) => {
@@ -155,7 +155,7 @@ export const ProductCard = ({ product }) => {
                   imageUrl: product.highResolutionImages
                     ? product.highResolutionImages[0]
                     : product.thumbnailImage || "",
-                  quantity: 1,
+                  quantity: 1
                 });
                 toast.error("Remove from cart Failed. Please Login first!");
                 return redirect("/login");
