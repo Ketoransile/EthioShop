@@ -14,6 +14,7 @@ import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { useWishStore } from "@/store/wishlist-store";
+import FavouriteHeartButton from "./FavouriteHeartButton";
 
 export const ProductCard = ({ product }) => {
   const { wishItems, addToWish, removeFromWish } = useWishStore();
@@ -79,9 +80,12 @@ export const ProductCard = ({ product }) => {
               </div>
               <div className="">
                 {" "}
-                {isWishItem ? (
+                <FavouriteHeartButton product={product} />
+                {/* {isWishItem ? (
                   <button
-                    onClick={async () => {
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
                       removeFromWish(product);
                       const { data: session } = await authClient.getSession();
                       if (!session) {
@@ -103,7 +107,9 @@ export const ProductCard = ({ product }) => {
                   </button>
                 ) : (
                   <button
-                    onClick={async () => {
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
                       addToWish(product);
                       const { data: session } = await authClient.getSession();
                       if (!session) {
@@ -124,7 +130,7 @@ export const ProductCard = ({ product }) => {
                       // className="absolute top-4 right-4 "
                     />
                   </button>
-                )}
+                )} */}
               </div>
 
               {isDiscounted && (

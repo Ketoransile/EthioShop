@@ -13,21 +13,22 @@ const MyAccountNavigation = () => {
             <h1 className="font-semibold text-lg">Manage My Account</h1>
             <div className="flex flex-col gap-2 px-8 text-gray-500">
               <Link href="/profile">My Profile</Link>
-              <Link href="/my-address">My Address</Link>
-              <Link href="/my-payment-option">My Payment Options</Link>
+              {/* <Link href="/my-address">My Address</Link> */}
+              {/* <Link href="/my-payment-option">My Payment Options</Link> */}
             </div>
           </div>
           <div className="flex flex-col gap-4 ">
             <h1 className="font-semibold text-lg">Manage Orders</h1>
             <div className="flex flex-col gap-2 px-8 text-gray-500">
               <Link href="/my-orders">My Orders</Link>
-              <Link href="/my-cancellations">My Cancellations</Link>
+              {/* <Link href="/my-cancellations">My Cancellations</Link> */}
             </div>
           </div>
-          <div className="">
-            <Link href="/wish-list" className="font-semibold text-lg">
-              My WishList
-            </Link>
+          <div className="flex flex-col gap-4">
+            <h1 className="font-semibold text-lg"> My WishList</h1>
+            <div className="flex flex-col gap-2 px-8 text-gray-500">
+              <Link href="/wish-list">My Favourites</Link>
+            </div>
           </div>
         </div>
       </div>

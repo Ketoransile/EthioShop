@@ -9,6 +9,7 @@ import { useCartStore } from "@/store/cart-store";
 
 // import { use } from "react";
 import { Document } from "mongoose";
+import Link from "next/link";
 interface Price {
   value: number;
   currency: string;
@@ -122,7 +123,9 @@ export default function ProductsDetailPage({ product }: { product: IProduct }) {
               +
             </Button>
           </div>
-          <Button className="bg-brandBg ">Buy Now</Button>
+          <Link href="/">
+            <Button className="bg-brandBg ">Buy Now</Button>
+          </Link>
           <CiHeart size={32} className="border-gray-500" />
         </div>
         <div className="flex flex-col">
