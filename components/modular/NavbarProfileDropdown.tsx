@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { LuShoppingBag } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
-import { FaUserCircle } from "react-icons/fa";
 import {
   DropdownMenu,
   DropdownMenuContent,
