@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { LuShoppingBag } from "react-icons/lu";
 import { TbLogout2 } from "react-icons/tb";
+import { FaUserCircle } from "react-icons/fa";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -38,20 +39,18 @@ export function NavbarProfileDropdown() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          className="bg-brandBg hover:bg-blue-400 cursor-pointer border-r-0 border-l-0 border-t-0 border-b-0 rounded-full "
-        >
+        {/* <button className="bg-brandBg hover:bg-blue-400 cursor-pointer p-2 border-r-0 border-l-0 border-t-0 border-b-0 rounded-full ">
           {" "}
           <FiUser size={24} className="text-white" />
-        </Button>
+        </button> */}
+        <FaUserCircle size={28} className="text-brandBg cursor-pointer" />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="w-56 mt-4 ml-20"
         // collisionPadding={16}
         // avoidCollisions={true}
       >
-        <DropdownMenuLabel>My Profile</DropdownMenuLabel>
+        <DropdownMenuLabel>Manage My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
@@ -60,7 +59,7 @@ export function NavbarProfileDropdown() {
               className="flex items-center gap-4 cursor-pointer"
             >
               <FiUser size={24} />
-              <p>Manage My Account</p>
+              <p>My Profile</p>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>

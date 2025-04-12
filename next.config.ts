@@ -37,6 +37,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  env: {
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  },
   // add more config options here if needed
 };
 

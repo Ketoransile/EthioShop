@@ -2,9 +2,8 @@
 import Link from "next/link";
 import { IoSearchOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
-import { FaRegHeart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-
+import { IoMdHeartEmpty } from "react-icons/io";
 import { NavbarProfileDropdown } from "../modular/NavbarProfileDropdown";
 import { authClient } from "@/lib/auth-client";
 import { useCartStore } from "@/store/cart-store";
@@ -55,7 +54,7 @@ export const Navbar = () => {
               </Link> */}
               <div className="relative">
                 <Link href="/wish-list">
-                  <FaRegHeart size={28} className="" />
+                  <IoMdHeartEmpty size={28} className="" />
                   {numberOfWishItems > 0 && (
                     <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                       {numberOfWishItems}

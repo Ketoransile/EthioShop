@@ -93,7 +93,7 @@ export const Footer = () => {
           </div>
         </div>{" "}
         <p className="text-gray-500  absolute bottom-4  left-0 right-0 text-center ">
-          &copy; Copyright Abdi 2025. All rights reserved
+          &copy; Copyright EthioShop 2025. All rights reserved
         </p>
       </div>
     </>
