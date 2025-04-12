@@ -2,23 +2,23 @@
 import Image from "next/image";
 import { FaCartPlus } from "react-icons/fa6";
 import { MdRemoveShoppingCart } from "react-icons/md";
-import { CiHeart } from "react-icons/ci";
+// import { CiHeart } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 // import { FaHeartCirclePlus } from "react-icons/fa6";
 // import { FaHeartCircleXmark } from "react-icons/fa6";
-import { FaHeart } from "react-icons/fa";
+// import { FaHeart } from "react-icons/fa";
 // import { Button } from "../ui/button";
 import { useCartStore } from "@/store/cart-store";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { useWishStore } from "@/store/wishlist-store";
+// import { useWishStore } from "@/store/wishlist-store";
 import FavouriteHeartButton from "./FavouriteHeartButton";
 
 export const ProductCard = ({ product }) => {
-  const { wishItems, addToWish, removeFromWish } = useWishStore();
-  const isWishItem = wishItems.find((item) => item._id === product._id);
+  // const { wishItems } = useWishStore();
+  // const isWishItem = wishItems.find((item) => item._id === product._id);
   const { items, removeItem, addItem } = useCartStore();
   const cartItem = items.find((item) => item.id === product._id);
   const numStars = Math.floor(product?.stars) || 0;
@@ -155,7 +155,7 @@ export const ProductCard = ({ product }) => {
                   imageUrl: product.highResolutionImages
                     ? product.highResolutionImages[0]
                     : product.thumbnailImage || "",
-                  quantity: 1,
+                  quantity: 1
                 });
                 toast.error("Remove from cart Failed. Please Login first!");
                 return redirect("/login");
