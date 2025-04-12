@@ -28,7 +28,7 @@ export const Navbar = () => {
   }
   return (
     <>
-      <div className="flex pt-6 pb-4 items-center justify-between ">
+      <div className="sticky top-0 z-50 backdrop-blur-xl bg-white/60 flex pt-6 pb-4 items-center justify-between -mx-20 px-20 ">
         <Link href="/" className="text-2xl font-bold">
           Ethio<span className="text-blue-600">shop</span>
         </Link>

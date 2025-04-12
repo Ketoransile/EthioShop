@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { FiUser } from "react-icons/fi";
+import { LuUser } from "react-icons/lu";
 import { IoHomeOutline } from "react-icons/io5";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
@@ -43,7 +44,7 @@ export function NavbarProfileDropdown() {
           {" "}
           <FiUser size={24} className="text-white" />
         </button> */}
-        <FaUserCircle size={28} className="text-brandBg cursor-pointer" />
+        <LuUser size={28} className="cursor-pointer" />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="w-56 mt-4 ml-20"
