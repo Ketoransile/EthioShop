@@ -71,8 +71,8 @@ export const BestSellingList = async () => {
       </div>
       <h1 className="text-4xl font-semibold">Best Selling Products</h1>
 
-      <div className="grid grid-cols-4 gap-6 gap-y-16 items-center justify-between pt-20">
-        {products.slice(0, 5).map((product) => (
+      <div className="grid grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
+        {products.slice(0, 10).map((product) => (
           // <Suspense fallback={<ProductCardSkeleton />} key={product._id}>
           <ProductCard product={product} key={product.title} />
           // </Suspense>

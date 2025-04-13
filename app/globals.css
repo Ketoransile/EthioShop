@@ -4,7 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 html {
   overflow-y: auto;
+  overflow-x: auto;
 }
+
 @theme {
   --color-brandBg: oklch(0.623 0.214 259.815);
 }

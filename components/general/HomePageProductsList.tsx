@@ -61,7 +61,7 @@ export const HomePageProductsList = async () => {
       </div>
       <h1 className="text-4xl font-semibold">Explore our products</h1>
 
-      <div className="grid grid-cols-4 gap-6 gap-y-16 items-center justify-between pt-20">
+      <div className="grid grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
         {products.slice(10, 22).map((product) => (
           <ProductCard product={product} key={product.title} />
         ))}

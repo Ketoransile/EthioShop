@@ -8,6 +8,7 @@ import { NavbarProfileDropdown } from "../modular/NavbarProfileDropdown";
 import { authClient } from "@/lib/auth-client";
 import { useCartStore } from "@/store/cart-store";
 import { useWishStore } from "@/store/wishlist-store";
+import { productsDataSet } from "@/lib/productsDataSet";
 export const Navbar = () => {
   const { items } = useCartStore();
   const { wishItems } = useWishStore();
@@ -17,6 +18,7 @@ export const Navbar = () => {
     0
   );
   console.log("Navbar rendered");
+  console.log("Productsdataset length is : ", productsDataSet.length);
   const {
     data: session,
     // isPending, //loading state
@@ -34,6 +36,7 @@ export const Navbar = () => {
         </Link>
         <nav className="flex gap-12 items-center justify-between font-medium">
           <Link href="/">Home</Link>
+          <Link href="/products">Products</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/about">About</Link>
         </nav>

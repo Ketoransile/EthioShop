@@ -44,6 +44,7 @@ interface IProduct extends Document {
   galleryThumbnails: string[];
   highResolutionImages: string[];
   thumbnailImage: string;
+  category: string;
   stars: number;
   inStock: boolean;
 }
@@ -63,6 +64,7 @@ const productSchema = new Schema<IProduct>({
   galleryThumbnails: { type: [String], required: true },
   highResolutionImages: { type: [String], required: true },
   thumbnailImage: { type: String, required: true },
+  category: { type: String, required: true },
   stars: { type: Number, required: true },
   inStock: { type: Boolean, required: true },
 });

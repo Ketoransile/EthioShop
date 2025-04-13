@@ -32,7 +32,7 @@ export const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="relative w-full flex flex-col  hover:drop-shadow-sm hover:shadow-blue-500 border-b rounded-xl border-gray-100 hover:border-none shadow-md  shadow-gray-200">
+    <div className="relative w-full flex flex-col hover:drop-shadow-sm hover:shadow-blue-500 border-b rounded-xl border-gray-100 hover:border-none shadow-md  shadow-gray-200">
       <Link
         href={`/products/${product._id}`}
         // className="hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
@@ -43,7 +43,7 @@ export const ProductCard = ({ product }) => {
             width={200}
             height={200}
             alt={product.title}
-            className="object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+            className="stretch object-cover transition-transform duration-300 ease-in-out hover:scale-110"
           />
         </div>
 
@@ -51,9 +51,9 @@ export const ProductCard = ({ product }) => {
           <p className="font-bold text-sm text-gray-600">
             {truncateTitle(product.title.split(" ").slice(0, 4).join(" "))}
           </p>
-          <div className="w-full grid grid-cols-4  gap-y-2 justify-between items-center">
+          <div className="w-full flex flex-col  ">
             {" "}
-            <div className="col-span-2 flex items-center gap-2">
+            <div className=" flex items-center gap-2">
               <p className=" font-bold col-span-2 text-xl text-black">
                 ${product.price?.value}
               </p>
@@ -132,6 +132,66 @@ export const ProductCard = ({ product }) => {
                   </button>
                 )} */}
               </div>
+              <div className="self-end p-1">
+                {cartItem ? (
+                  <button
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      removeItem(product._id);
+                      const { data: session } = await authClient.getSession();
+                      if (!session) {
+                        addItem({
+                          id: product._id,
+                          name: product.title,
+                          price: product.price?.value || 0,
+                          imageUrl: product.highResolutionImages
+                            ? product.highResolutionImages[0]
+                            : product.thumbnailImage || "",
+                          quantity: 1,
+                        });
+                        toast.error(
+                          "Remove from cart Failed. Please Login first!"
+                        );
+                        return redirect("/login");
+                      }
+                      toast.error("Item removed from cart.");
+                    }}
+                    // className="bg-black hover:bg-gray-800  py-2 text-white rounded-none  cursor-pointer"
+                    className="flex item-center justify-center w-fit rounded-full  p-2 bg-red-500 cursor-pointer"
+                  >
+                    <MdRemoveShoppingCart size={16} color="white" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      addItem({
+                        id: product._id,
+                        name: product.title,
+                        price: product.price?.value || 0,
+                        imageUrl: product.highResolutionImages
+                          ? product.highResolutionImages[0]
+                          : product.thumbnailImage || "",
+                        quantity: 1,
+                      });
+                      const { data: session } = await authClient.getSession();
+                      if (!session) {
+                        removeItem(product._id);
+                        toast.error("Add To Cart Failed. Please Login first!");
+                        return redirect("/login");
+                      }
+                      toast.success("Item added to cart!");
+                    }}
+                    // className="bg-brandBg hover:bg-blue-400  py-2 text-white rounded-none  cursor-pointer"
+                    className="flex item-center justify-center w-fit rounded-full  p-2 bg-brandBg cursor-pointer"
+                  >
+                    <FaCartPlus className="" size={16} color="white" />
+                    {/* <p className="text-white text-center font-bold ">Add to cart</p> */}
+                  </button>
+                )}
+              </div>
 
               {isDiscounted && (
                 // <div className="w-fit self-end  bg-red-500 px-2  rounded-sm text-white text-sm">{`-${discount}%`}</div>
@@ -141,60 +201,6 @@ export const ProductCard = ({ product }) => {
           </div>
         </div>
       </Link>
-      <div className="self-end p-2">
-        {cartItem ? (
-          <button
-            onClick={async () => {
-              removeItem(product._id);
-              const { data: session } = await authClient.getSession();
-              if (!session) {
-                addItem({
-                  id: product._id,
-                  name: product.title,
-                  price: product.price?.value || 0,
-                  imageUrl: product.highResolutionImages
-                    ? product.highResolutionImages[0]
-                    : product.thumbnailImage || "",
-                  quantity: 1
-                });
-                toast.error("Remove from cart Failed. Please Login first!");
-                return redirect("/login");
-              }
-              toast.error("Item removed from cart.");
-            }}
-            // className="bg-black hover:bg-gray-800  py-2 text-white rounded-none  cursor-pointer"
-            className="flex item-center justify-center w-fit rounded-full  p-2 bg-red-500 cursor-pointer"
-          >
-            <MdRemoveShoppingCart size={24} color="white" />
-          </button>
-        ) : (
-          <button
-            onClick={async () => {
-              addItem({
-                id: product._id,
-                name: product.title,
-                price: product.price?.value || 0,
-                imageUrl: product.highResolutionImages
-                  ? product.highResolutionImages[0]
-                  : product.thumbnailImage || "",
-                quantity: 1,
-              });
-              const { data: session } = await authClient.getSession();
-              if (!session) {
-                removeItem(product._id);
-                toast.error("Add To Cart Failed. Please Login first!");
-                return redirect("/login");
-              }
-              toast.success("Item added to cart!");
-            }}
-            // className="bg-brandBg hover:bg-blue-400  py-2 text-white rounded-none  cursor-pointer"
-            className="flex item-center justify-center w-fit rounded-full  p-2 bg-brandBg cursor-pointer"
-          >
-            <FaCartPlus className="" size={24} color="white" />
-            {/* <p className="text-white text-center font-bold ">Add to cart</p> */}
-          </button>
-        )}
-      </div>
     </div>
   );
 };

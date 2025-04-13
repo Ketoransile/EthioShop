@@ -198,7 +198,9 @@ let client: MongoClient | null = globalAny.mongoClient || null;
 
 async function connectDBNative() {
   if (!client) {
-    client = new MongoClient(process.env.MONGODB_URL as string);
+    client = new MongoClient(process.env.MONGODB_URL as string, {
+      serverSelectionTimeoutMS: 30000, // 30 seconds timeout
+    });
     await client.connect();
     console.log("Connected to MongoDB (Native Driver)");
     globalAny.mongoClient = client; // Cache for hot-reloading in development
