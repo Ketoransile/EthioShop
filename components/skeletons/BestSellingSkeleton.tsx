@@ -11,8 +11,8 @@ export default function BestSellingSkeleton() {
         <h1 className="text-sm text-blue-500 font-bold">This Month</h1>
       </div>
       <h1 className="text-4xl font-semibold">Best Selling Products</h1>
-      <div className="grid grid-cols-4 gap-6 gap-y-16   items-center justify-between pt-20">
-        {Array.from({ length: 5 }).map((_, index) => (
+      <div className="grid grid-cols-5 gap-6 gap-y-16   items-center justify-between pt-20">
+        {Array.from({ length: 10 }).map((_, index) => (
           <ProductCardSkeleton key={index} />
         ))}
       </div>

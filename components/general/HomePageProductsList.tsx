@@ -11,7 +11,7 @@ async function fetchHomePageProducts() {
   try {
     await connectDB();
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const response = await fetch(`${baseUrl}/api/products/list`, {
+    const response = await fetch(`${baseUrl}/api/products/list?limit=0`, {
       method: "GET",
       cache: "no-store",
       // next: { revalidate: revalidate },
@@ -44,7 +44,7 @@ async function fetchHomePageProducts() {
 
 export const HomePageProductsList = async () => {
   const data = await fetchHomePageProducts();
-  console.log("Data from hompaegproduct list", data);
+  // console.log("Data from hompaegproduct list \n", data.length);
   // if (data.status === 404 || data.status === 500 || data.data === null) {
   //   return <div className="">No Products found</div>;
   // }
@@ -53,6 +53,8 @@ export const HomePageProductsList = async () => {
   }
 
   const products = data.data;
+  console.log("Total products:", products.length);
+
   return (
     <div className="flex flex-col gap-4 pt-20">
       <div className="flex gap-2 items-center">
@@ -62,8 +64,10 @@ export const HomePageProductsList = async () => {
       <h1 className="text-4xl font-semibold">Explore our products</h1>
 
       <div className="grid grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
-        {products.slice(10, 22).map((product) => (
+        {products.slice(15, 25).map((product) => (
+          // <Suspense fallback={<ProductCardSkeleton />} key={product._id}>
           <ProductCard product={product} key={product.title} />
+          // </Suspense>
         ))}
       </div>
       <Link href="/products" className="pt-10 self-center">

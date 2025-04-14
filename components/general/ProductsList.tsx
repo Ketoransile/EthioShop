@@ -66,12 +66,12 @@ import ProductsPagination from "./ProductsPagination";
 type ProductsListProps = {
   filters: { [key: string]: string | string[] | undefined };
 };
-
+const limit = 10;
 async function fetchProducts(filters) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const query = new URLSearchParams(filters).toString();
-    const url = `${baseUrl}/api/products/list?${query}`;
+    const url = `${baseUrl}/api/products/list?limit=${limit}&${query}`;
     const response = await fetch(url, {
       method: "GET",
       cache: "no-store",
