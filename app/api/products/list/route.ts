@@ -15,6 +15,17 @@ export async function GET(req: NextRequest) {
       filters.category = category;
     }
     const search = searchParams.get("search");
+    if (search && search !== "") {
+      filters.title = { $regex: search, $options: "i" };
+      // filters.$or = [
+      //   { title: { $regex: search, $options: "i" } },
+      //   { description: { $regex: search, $options: "i" } },
+      // ];
+    }
+
+    const page = Number(searchParams.get("page")) || 1;
+    const limit = Number(searchParams.get("limit")) || 10; // Default to 10 items per page
+    const skip = (page - 1) * limit;
 
     // Price range filter
     const min = searchParams.get("min");
@@ -61,8 +72,12 @@ export async function GET(req: NextRequest) {
     console.log("filters in api route are: ", filters);
 
     // Query products
-    const products = await Product.find(filters).sort(sort);
-
+    const products = await Product.find(filters)
+      .sort(sort)
+      .skip(skip)
+      .limit(limit);
+    const totalProducts = await Product.countDocuments(filters);
+    const totalPages = Math.ceil(totalProducts / limit);
     if (!products || products.length === 0) {
       return NextResponse.json({
         message: "No products found",
@@ -75,6 +90,14 @@ export async function GET(req: NextRequest) {
       message: "Products fetched successfully",
       data: products,
       status: 200,
+      pagination: {
+        totalProducts,
+        totalPages,
+        currentPage: page,
+        productsPerPage: limit,
+        hasNextPage: page < totalPages,
+        hasPreviousPage: page > 1,
+      },
     });
   } catch (error) {
     console.error(error);

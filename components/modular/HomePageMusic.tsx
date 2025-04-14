@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import music from "../../assets/music.svg";
+import { useRouter } from "next/navigation";
 export const HomePageMusic = () => {
+  const router = useRouter();
   return (
     <div className="pt-20">
       <div className="flex gap-10 items-center justify-between px-20  py-20 bg-black">
@@ -13,6 +16,7 @@ export const HomePageMusic = () => {
           <Button
             variant="ghost"
             className="bg-brandBg w-fit text-white px-10 py-4 cursor-pointer"
+            onClick={() => router.push("/products")}
           >
             Buy Now
           </Button>

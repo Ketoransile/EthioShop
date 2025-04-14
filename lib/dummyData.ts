@@ -12,6 +12,7 @@ export const dummyCategories = [
     filters: ["brand", "storage", "5G", "screen_size"],
     icon: "BsPhone", // From React Icons
     image: IoIosPhonePortrait,
+    href: "/?category=smartphone",
   },
   {
     id: "cat_computers",
@@ -20,6 +21,7 @@ export const dummyCategories = [
     filters: ["ram", "processor", "gpu", "storage_type"],
     icon: "BsLaptop",
     image: RiComputerLine,
+    href: "/?category=computer",
   },
   {
     id: "cat_cameras",
@@ -28,6 +30,7 @@ export const dummyCategories = [
     filters: ["sensor_size", "zoom", "video_resolution", "drone_range"],
     icon: "BsCamera",
     image: FaCamera,
+    href: "/?category=camera",
   },
   {
     id: "cat_wearables",
@@ -36,6 +39,7 @@ export const dummyCategories = [
     filters: ["os", "battery_life", "health_features", "waterproof"],
     icon: "BsSmartwatch",
     image: BsSmartwatch,
+    href: "/?category=smartwatch",
   },
   {
     id: "cat_audio",
@@ -44,6 +48,7 @@ export const dummyCategories = [
     filters: ["type", "noise_cancellation", "wireless", "driver_size"],
     icon: "BsHeadphones",
     image: IoHeadsetSharp,
+    href: "/?category=headphone",
   },
   {
     id: "cat_gaming",
@@ -52,5 +57,6 @@ export const dummyCategories = [
     filters: ["platform", "refresh_rate", "mechanical_keys", "rgb_lights"],
     icon: "BsJoystick",
     image: IoGameController,
+    href: "/?category=gaming",
   },
 ];

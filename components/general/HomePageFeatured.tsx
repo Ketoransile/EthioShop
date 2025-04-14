@@ -21,7 +21,7 @@ export const HomePageFeatured = () => {
 
       <div className="grid grid-cols-3  items-center justify-between pt-20">
         <div className="relative row-span-2  ">
-          <div className=" hover:bg-slate-100 pb-10 ">
+          <Link className="  pb-10 " href="/products?category=smartphone">
             <Image
               src={iphone1}
               width={400}
@@ -29,8 +29,8 @@ export const HomePageFeatured = () => {
               alt="headset-image"
               className=" shadow-b-gray-200"
             />
-          </div>
-          <div className="absolute  left-10 bottom-20 flex  flex-col gap-4 max-w-64 text-white ">
+          </Link>
+          {/* <div className="absolute backdrop-blur-2xl bg-white/60  left-10 bottom-20 flex  flex-col gap-4 max-w-64 text-white w-full stretch ">
             <h1 className="text-2xl front-bold">Iphone 16 series</h1>
             <p className="text-md">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -38,10 +38,10 @@ export const HomePageFeatured = () => {
             <Link href="/" className="border-b border-b-slate-400 w-fit">
               Shop Now
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className=" row-span-2">
-          <div className="">
+          <Link className="" href="/products?category=smartwatch">
             <Image
               src={galaxywatch1}
               width={400}
@@ -49,10 +49,10 @@ export const HomePageFeatured = () => {
               alt="headset-image"
               className=" object-cover"
             />
-          </div>
+          </Link>
         </div>
         <div className=" ">
-          <div className="">
+          <Link className="" href="/products?category=computer">
             <Image
               src={asus}
               width={400}
@@ -60,10 +60,10 @@ export const HomePageFeatured = () => {
               alt="headset-image"
               className=" object-cover"
             />
-          </div>
+          </Link>
         </div>
         <div className=" ">
-          <div className="">
+          <Link className="" href="/products?category=computer">
             <Image
               src={samsung}
               width={400}
@@ -71,7 +71,7 @@ export const HomePageFeatured = () => {
               alt="headset-image"
               className=" object-cover"
             />
-          </div>
+          </Link>
         </div>
 
         {/* <div className="">

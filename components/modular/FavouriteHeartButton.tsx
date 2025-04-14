@@ -30,7 +30,7 @@ const FavouriteHeartButton = ({ product }) => {
       className="flex item-center justify-center w-fit rounded-full p-2 cursor-pointer"
       aria-label="Remove from wishlist"
     >
-      <FaHeart size={20} color="red" />
+      <FaHeart size={24} color="red" />
     </button>
   ) : (
     <button
@@ -51,7 +51,7 @@ const FavouriteHeartButton = ({ product }) => {
       className="flex item-center justify-center w-fit rounded-full p-2 cursor-pointer"
       aria-label="Add to wishlist"
     >
-      <CiHeart size={20} />
+      <CiHeart size={24} />
     </button>
   );
 };

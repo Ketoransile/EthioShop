@@ -10,6 +10,8 @@ import { useCartStore } from "@/store/cart-store";
 // import { use } from "react";
 import { Document } from "mongoose";
 import Link from "next/link";
+import FavouriteHeartButton from "../modular/FavouriteHeartButton";
+import { useRouter } from "next/navigation";
 interface Price {
   value: number;
   currency: string;
@@ -28,6 +30,7 @@ interface IProduct extends Document {
   inStock: boolean;
 }
 export default function ProductsDetailPage({ product }: { product: IProduct }) {
+  const router = useRouter();
   const numStars = Math.floor(product?.stars) || 0;
 
   const { items, addItem, removeItem } = useCartStore();
@@ -106,7 +109,7 @@ export default function ProductsDetailPage({ product }: { product: IProduct }) {
           </div>
         </div>
         <div className="flex items-center justify-between w-full">
-          <div className="flex items-center ">
+          <div className="flex items-center gap-4 ">
             <Button
               onClick={onRemoveItem}
               className="bg-gray-300 text-black rounded-none rounded-l-xl"
@@ -122,11 +125,16 @@ export default function ProductsDetailPage({ product }: { product: IProduct }) {
             >
               +
             </Button>
+            <FavouriteHeartButton product={product} />
           </div>
           <Link href="/">
-            <Button className="bg-brandBg ">Buy Now</Button>
+            <Button
+              className="bg-brandBg cursor-pointer"
+              onClick={() => router.push("/cart")}
+            >
+              Buy Now
+            </Button>
           </Link>
-          <CiHeart size={32} className="border-gray-500" />
         </div>
         <div className="flex flex-col">
           <div className="border border-gray-500 rounded-md">

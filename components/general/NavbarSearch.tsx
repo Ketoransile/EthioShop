@@ -1,7 +1,8 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { IoSearchOutline } from "react-icons/io5";
+import { FiDelete } from "react-icons/fi";
 import { useDebouncedCallback } from "use-debounce";
+import { BsBackspace } from "react-icons/bs";
 
 const NavbarSearch = () => {
   const pathname = usePathname();
@@ -55,7 +56,11 @@ const NavbarSearch = () => {
         placeholder="What are you looking for ?"
         className=" placeholder:text-sm border-none focus:border-none focus:outline-none"
       />
-      <IoSearchOutline size={24} className="font-normal cursor-pointer" />
+      <FiDelete
+        size={24}
+        className="font-normal cursor-pointer"
+        onClick={clearAllFilters}
+      />
     </>
   );
 };

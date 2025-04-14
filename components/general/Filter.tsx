@@ -159,7 +159,7 @@ const Filter = () => {
     if (filters.sort) params.set("sort", filters.sort);
 
     replace(`${pathname}?${params.toString()}`);
-  }, 500);
+  }, 200);
 
   // Update URL when filters change
   useEffect(() => {
