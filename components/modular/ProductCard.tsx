@@ -37,7 +37,7 @@ export const ProductCard = ({ product }) => {
         href={`/products/${product._id}`}
         // className="hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
       >
-        <div className="relative  flex items-center justify-center   h-60 w-full overflow-hidden border border-gray-200 rounded-2xl">
+        <div className="relative  flex items-center justify-center   h-60 w-full overflow-hidden border rounded-2xl">
           <Image
             src={product.thumbnailImage}
             width={200}

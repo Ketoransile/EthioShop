@@ -1,9 +1,13 @@
 import { ProductCard } from "../modular/ProductCard";
-
-async function fetchProducts() {
+type ProductsListProps = {
+  filters: { [key: string]: string | string[] | undefined };
+};
+async function fetchProducts(filters: any) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const response = await fetch(`${baseUrl}/api/products/list`, {
+    const query = new URLSearchParams(filters).toString();
+    const url = `${baseUrl}/api/products/list?${query}`;
+    const response = await fetch(url, {
       method: "GET",
 
       cache: "no-store",
@@ -33,8 +37,8 @@ async function fetchProducts() {
   }
 }
 
-export const ProductsList = async () => {
-  const data = await fetchProducts();
+export const ProductsList = async ({ filters }: ProductsListProps) => {
+  const data = await fetchProducts(filters);
 
   if (data.status !== 200 || !data.data || data.data.length === 0) {
     return <div className="">No Products found matching your criteria</div>;

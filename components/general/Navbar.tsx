@@ -9,7 +9,19 @@ import { authClient } from "@/lib/auth-client";
 import { useCartStore } from "@/store/cart-store";
 import { useWishStore } from "@/store/wishlist-store";
 import { productsDataSet } from "@/lib/productsDataSet";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import NavbarSearch from "./NavbarSearch";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Products", href: "/products" },
+  { name: "Contact", href: "/contact" },
+  { name: "About", href: "/about" },
+];
 export const Navbar = () => {
+  const pathname = usePathname();
+
   const { items } = useCartStore();
   const { wishItems } = useWishStore();
   const numberOfWishItems = wishItems.reduce((total) => total + 1, 0);
@@ -35,19 +47,24 @@ export const Navbar = () => {
           Ethio<span className="text-blue-600">shop</span>
         </Link>
         <nav className="flex gap-12 items-center justify-between font-medium">
-          <Link href="/">Home</Link>
-          <Link href="/products">Products</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/about">About</Link>
+          {navLinks.map((navLink) => {
+            const isActive =
+              pathname === navLink.href ||
+              (pathname.startsWith(navLink.href) && navLink.href !== "/");
+            return (
+              <Link
+                href={navLink.href}
+                key={navLink.name}
+                className={isActive ? "text-blue-500 font-bold" : "text-black"}
+              >
+                {navLink.name}
+              </Link>
+            );
+          })}
         </nav>
         <div className="flex gap-6 items-center">
           <div className="flex items-center bg-gray-100 px-4 py-2 rounded-xl ">
-            <input
-              type="text"
-              placeholder="What are you looking for ?"
-              className=" placeholder:text-sm border-none focus:border-none focus:outline-none"
-            />
-            <IoSearchOutline size={24} className="font-normal" />
+            <NavbarSearch />
           </div>
           {session ? (
             // <div className="gap-4 items-center justify-between flex">

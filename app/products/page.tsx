@@ -1,7 +1,12 @@
 import Filter from "@/components/general/Filter";
 import { ProductsList } from "@/components/general/ProductsList";
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+export default async function ProductsPage(props: {
+  searchParams: SearchParams;
+}) {
+  const searchParams = await props.searchParams;
+  const selectedCategory = searchParams.category || "Products";
 
-export default function ProductsPage() {
   return (
     <div className="pt-10 relative">
       {/* <div className="-mt-20 w-full flex items-center justify-center rounded-xl">
@@ -39,10 +44,11 @@ export default function ProductsPage() {
       {/* FIlter */}
       <Filter />
       <h1 className="mt-20 font-semibold text-2xl">
-        <span className="text-blue-500 font-bold">Products</span> For You
+        <span className="text-blue-500 font-bold">{selectedCategory}</span> For
+        You
       </h1>
       {/* Products List */}
-      <ProductsList />
+      <ProductsList filters={searchParams} />
     </div>
   );
 }
