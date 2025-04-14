@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { IoSearchOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
 import { IoCartOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
@@ -9,7 +8,6 @@ import { authClient } from "@/lib/auth-client";
 import { useCartStore } from "@/store/cart-store";
 import { useWishStore } from "@/store/wishlist-store";
 import { productsDataSet } from "@/lib/productsDataSet";
-import { useState } from "react";
 import { usePathname } from "next/navigation";
 import NavbarSearch from "./NavbarSearch";
 

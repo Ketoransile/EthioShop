@@ -2,7 +2,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiDelete } from "react-icons/fi";
 import { useDebouncedCallback } from "use-debounce";
-import { BsBackspace } from "react-icons/bs";
 
 const NavbarSearch = () => {
   const pathname = usePathname();

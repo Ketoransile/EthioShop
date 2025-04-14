@@ -66,7 +66,7 @@ type ProductsListProps = {
   filters: { [key: string]: string | string[] | undefined };
 };
 
-async function fetchProducts(filters: any) {
+async function fetchProducts(filters) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const query = new URLSearchParams(filters).toString();
@@ -112,7 +112,7 @@ export const ProductsList = async ({ filters }: ProductsListProps) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-5 gap-10 gap-y-16 items-center justify-between pt-20">
-        {products.map((product: any) => (
+        {products.map((product) => (
           <ProductCard product={product} key={product._id} />
         ))}
       </div>
