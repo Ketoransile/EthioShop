@@ -1,5 +1,6 @@
 import Filter from "@/components/general/Filter";
 import { ProductsList } from "@/components/general/ProductsList";
+import { Suspense } from "react";
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 export default async function ProductsPage(props: {
   searchParams: SearchParams;
@@ -41,8 +42,10 @@ export default async function ProductsPage(props: {
           className="w-64 h-64 rounded-br-xl"
         />
       </div> */}
-      {/* FIlter */}
-      <Filter />
+      {/* FIlter */}{" "}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Filter />
+      </Suspense>
       <h1 className="mt-20 font-semibold text-2xl">
         <span className="text-blue-500 font-bold">{selectedCategory}</span> For
         You

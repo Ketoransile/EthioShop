@@ -59,6 +59,7 @@
 //     </div>
 //   );
 // };
+import { Suspense } from "react";
 import { ProductCard } from "../modular/ProductCard";
 import ProductsPagination from "./ProductsPagination";
 
@@ -116,8 +117,9 @@ export const ProductsList = async ({ filters }: ProductsListProps) => {
           <ProductCard product={product} key={product._id} />
         ))}
       </div>
-
-      <ProductsPagination currentPage={currentPage} totalPages={totalPages} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProductsPagination currentPage={currentPage} totalPages={totalPages} />
+      </Suspense>
     </div>
   );
 };

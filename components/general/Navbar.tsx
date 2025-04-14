@@ -10,6 +10,7 @@ import { useWishStore } from "@/store/wishlist-store";
 import { productsDataSet } from "@/lib/productsDataSet";
 import { usePathname } from "next/navigation";
 import NavbarSearch from "./NavbarSearch";
+import { Suspense } from "react";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -62,7 +63,9 @@ export const Navbar = () => {
         </nav>
         <div className="flex gap-6 items-center">
           <div className="flex items-center bg-gray-100 px-4 py-2 rounded-xl ">
-            <NavbarSearch />
+            <Suspense fallback={<div>Loading...</div>}>
+              <NavbarSearch />
+            </Suspense>
           </div>
           {session ? (
             // <div className="gap-4 items-center justify-between flex">
