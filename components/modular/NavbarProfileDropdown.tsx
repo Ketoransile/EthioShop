@@ -83,7 +83,7 @@ export function NavbarProfileDropdown() {
         <DropdownMenuItem asChild>
           <Button
             onClick={handleLogout}
-            className="flex items-start justify-start gap-4 cursor-pointer bg-transparent text-black border-none w-full "
+            className="-mx-1 flex items-start justify-start gap-4 cursor-pointer bg-transparent text-black border-none w-full "
           >
             <TbLogout2 size={24} />
             <p>Logout</p>

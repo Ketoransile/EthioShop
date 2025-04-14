@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 // import { authClient } from "@/lib/auth-client";
 import { useCartStore } from "@/store/cart-store";
-import Link from "next/link";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export default function CartPage() {
+  const router = useRouter();
   const { getTotalPrice } = useCartStore();
   const totalPrice = getTotalPrice();
   // const cartItem = items.find((item) => item._id === product._id);
@@ -58,8 +59,12 @@ export default function CartPage() {
               <h1 className="text-gray-500">Total</h1>
               <h1 className="text-gray-500">${totalPrice}</h1>
             </div>
-            <Button className="bg-brandBg w-full py-2 mt-4 cursor-pointer">
-              <Link href="/checkout">Proceed To Checkout</Link>
+            <Button
+              className="bg-brandBg w-full py-2 mt-4 cursor-pointer"
+              onClick={() => router.push("/checkout")}
+            >
+              {/* <Link href="/checkout">Proceed To Checkout</Link> */}
+              Proceed To Checkout
             </Button>
           </div>
         </div>
