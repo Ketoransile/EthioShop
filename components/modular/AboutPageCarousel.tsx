@@ -94,9 +94,10 @@ export function AboutPageCarousel() {
         {testimonialsData.map((testimony, index) => (
           <CarouselItem
             key={index}
-            className="w-full flex items-center justify-between    lg:basis-1/3  "
+            className="w-32  drop-shadow-2xl  flex items-center justify-between   lg:basis-1/4  "
           >
-            <div className="w-full flex flex-col border border-slate-100 rounded-xl shadow-2xl px-10 pb-10 gap-4 items-center justify-center">
+            {/* <div className="w-full flex flex-col   rounded-xl shadow-2xl px-10 pb-10 gap-4 items-center justify-center"> */}
+            <div className="w-96 flex flex-col    px-10 pb-10 gap-4 items-center justify-center">
               <Image
                 src={testimony.image}
                 alt="testimony"

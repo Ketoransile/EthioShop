@@ -17,9 +17,9 @@ export const HomePageFeatured = () => {
         <TbRectangleVerticalFilled size={24} className="text-blue-500" />
         <h1 className="text-sm text-blue-500 font-bold">Featured</h1>
       </div>
-      <h1 className="text-4xl font-semibold">New Arrival</h1>
+      <h1 className="text-2xl lg:text-2xl font-semibold">New Arrival</h1>
 
-      <div className="grid grid-cols-3  items-center justify-between pt-20">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6  items-center justify-between pt-20">
         <div className="relative row-span-2  ">
           <Link className="  pb-10 " href="/products?category=smartphone">
             <Image

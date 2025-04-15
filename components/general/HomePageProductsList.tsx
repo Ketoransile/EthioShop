@@ -1,6 +1,4 @@
-// const revalidate = 60;
-// import { productsFromAmazon } from "@/lib/AmazonDataSetWithId";
-// import { dummyCategories } from "@/lib/dummyData";
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 import { TbRectangleVerticalFilled } from "react-icons/tb";
 import { ProductCard } from "../modular/ProductCard";
@@ -61,9 +59,11 @@ export const HomePageProductsList = async () => {
         <TbRectangleVerticalFilled size={24} className="text-blue-500" />
         <h1 className="text-sm text-blue-500 font-bold">Our Products</h1>
       </div>
-      <h1 className="text-4xl font-semibold">Explore our products</h1>
+      <h1 className="text-2xl lg:text-4xl font-semibold">
+        Explore our products
+      </h1>
 
-      <div className="grid grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
         {products.slice(15, 25).map((product) => (
           // <Suspense fallback={<ProductCardSkeleton />} key={product._id}>
           <ProductCard product={product} key={product.title} />

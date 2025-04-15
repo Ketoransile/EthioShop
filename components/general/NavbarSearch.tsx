@@ -47,7 +47,7 @@ const NavbarSearch = () => {
   };
 
   return (
-    <>
+    <div className="flex items-center  ">
       <input
         type="text"
         name="search"
@@ -61,7 +61,7 @@ const NavbarSearch = () => {
         className="font-normal cursor-pointer"
         onClick={clearAllFilters}
       />
-    </>
+    </div>
   );
 };
 

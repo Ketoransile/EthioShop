@@ -11,7 +11,7 @@ export default function HomePageProductsListSekeleton() {
       </div>
       <h1 className="text-4xl font-semibold">Explore our products</h1>
 
-      <div className="grid grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
         {Array.from({ length: 12 }).map((_, index) => (
           <ProductCardSkeleton key={index} />
         ))}

@@ -12,7 +12,9 @@ import { Suspense } from "react";
 export default function Home() {
   return (
     <>
-      <HeroSlider />
+      <div className="max-lg:hidden">
+        <HeroSlider />
+      </div>
       <CategoriesList />
       <Suspense fallback={<BestSellingSkeleton />}>
         <BestSellingList />

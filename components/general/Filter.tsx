@@ -178,7 +178,7 @@ const Filter = () => {
 
   return (
     <div className="flex flex-col gap-4 md:flex-row md:justify-between">
-      <div className="flex justify-between items-center gap-4">
+      <div className="flex max-lg:flex-wrap justify-between items-center gap-4">
         {/* Category Select */}
         <select
           name="category"

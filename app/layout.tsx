@@ -4,6 +4,22 @@ import "./globals.css";
 import { Navbar } from "@/components/general/Navbar";
 import { Footer } from "@/components/general/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { Inter } from "next/font/google";
+import { Montserrat, Roboto_Mono } from "next/font/google";
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  fallback: ["Arial", "sans-serif"],
+});
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -11,6 +27,10 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -27,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`px-4 md:px-12 lg:px-20 ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`px-4 md:px-12 lg:px-20 ${robotoMono.variable} ${geistSans.variable} ${montserrat.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
         <Navbar />
         {children}

@@ -63,7 +63,7 @@ export const ProductCard = ({ product }) => {
                 </p>
               )}
             </div>
-            <div className=" flex items-center gap-2">
+            <div className=" flex flex-wrap items-center gap-2">
               <div className="flex gap-1">
                 <div className="flex items-center justify-between ">
                   {[...Array(5)].map((_, index) => (
@@ -81,58 +81,8 @@ export const ProductCard = ({ product }) => {
               <div className="">
                 {" "}
                 <FavouriteHeartButton product={product} />
-                {/* {isWishItem ? (
-                  <button
-                    onClick={async (e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      removeFromWish(product);
-                      const { data: session } = await authClient.getSession();
-                      if (!session) {
-                        addToWish(product);
-                        toast.error("Please login to manage wishlist");
-                        return redirect("/login");
-                      }
-                      return toast.success(
-                        "Item removed from wishlist successfully!!"
-                      );
-                    }}
-                    className="flex item-center justify-center w-fit rounded-full  p-2 cursor-pointer"
-                  >
-                    <FaHeart
-                      size={20}
-                      color="red"
-                      // className="absolute top-4 right-4 "
-                    />
-                  </button>
-                ) : (
-                  <button
-                    onClick={async (e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      addToWish(product);
-                      const { data: session } = await authClient.getSession();
-                      if (!session) {
-                        removeFromWish(product);
-                        toast.error("Please login to manage wishlist");
-                        return redirect("/login");
-                      }
-                      return toast.success(
-                        "Item added to wish list successfully!!"
-                      );
-                    }}
-                    className="flex item-center justify-center w-fit rounded-full  p-2  cursor-pointer"
-                  >
-                    {" "}
-                    <CiHeart
-                      size={20}
-                      color=""
-                      // className="absolute top-4 right-4 "
-                    />
-                  </button>
-                )} */}
               </div>
-              <div className="self-end p-1">
+              <div className="item-end p-1">
                 {cartItem ? (
                   <button
                     onClick={async (e) => {

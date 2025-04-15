@@ -112,7 +112,7 @@ export const ProductsList = async ({ filters }: ProductsListProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-5 gap-10 gap-y-16 items-center justify-between pt-20">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 gap-y-16 items-center justify-between pt-20">
         {products.map((product) => (
           <ProductCard product={product} key={product._id} />
         ))}

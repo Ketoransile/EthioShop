@@ -79,15 +79,17 @@ export default function LoginPage() {
           src={sideImage}
           width={500}
           height={500}
-          className=""
+          className="max-lg:hidden"
           alt="sideImage"
         />
-        <div className="flex flex-col gap-6 w-1/4 ">
+        <div className="w-full px-6 flex flex-col gap-6 lg:w-1/3 ">
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-2xl font-bold max-lg:text-center">
               Login to Ethio<span className="text-blue-600">Shop</span>
             </h1>
-            <p className="text-sm">Enter your details below</p>
+            <p className="text-sm text-gray-400 max-lg:text-center">
+              Enter your details below
+            </p>
           </div>
 
           <FormField

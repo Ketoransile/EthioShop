@@ -23,7 +23,7 @@ export default function WishListPage() {
           Move All To Bag
         </Button>
       </div>
-      <div className="grid grid-cols-5 gap-6 gap-y-16 items-center justify-between ">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 gap-y-16 items-center justify-between ">
         {wishItems.map((product) => (
           <ProductCard product={product} key={product.title} />
         ))}
