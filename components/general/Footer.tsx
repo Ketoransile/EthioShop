@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MdSend } from "react-icons/md";
+// import { MdSend } from "react-icons/md";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
