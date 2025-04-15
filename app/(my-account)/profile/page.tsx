@@ -4,9 +4,9 @@ import { Label } from "@/components/ui/label";
 
 export default function MyAccountPage() {
   return (
-    <div className="flex flex-col gap-6 pt-20">
+    <div className="w-full flex flex-col gap-6 pt-20">
       <h1 className="text-brandBg font-bold text-xl">Edit Your Profile</h1>
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-6">
         <div className="flex flex-col gap-2">
           <Label htmlFor="first-name" className="text-sm font-semibold">
             First Name

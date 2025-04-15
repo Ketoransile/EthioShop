@@ -3,11 +3,12 @@ import { MdMail } from "react-icons/md";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 export default function ContactPage() {
   return (
-    <div className="flex pt-20 gap-12">
-      <div className="w-1/4 flex flex-col gap-8">
+    <div className="flex max-lg:flex-col pt-20 gap-12">
+      <div className="lg:w-1/4 flex lg:flex-col gap-8">
         <div className="flex flex-col gap-4">
           <div className="flex gap-2 items-center justify-items-start">
             <MdAddCall size={24} />
@@ -28,13 +29,29 @@ export default function ContactPage() {
           <p className="text-sm ">Emails: abdisileshi123@gmail.com</p>
         </div>
       </div>
-      <div className="relative w-3/4 flex flex-col gap-6">
-        <div className="flex gap-12 items-center justify-between">
-          <Input type="text" placeholder="Your Name*" />
-          <Input type="email" placeholder="Your Email*" />
-          <Input type="text" placeholder="Your Phone*" />
+      <div className="relative lg:w-3/4 flex flex-col gap-6 max-lg:text-xs">
+        <div className="flex max-lg:flex-col gap-2 lg:gap-12 items-center justify-between">
+          <div className="w-full flex flex-col gap-2">
+            <Label htmlFor="name">Name</Label>
+            <Input type="text" id="name" placeholder="Your Name*" />
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input type="email" id="email" placeholder="Your Email*" />
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <Label htmlFor="phone">Phone</Label>
+            <Input type="text" id="phone" placeholder="Your Phone*" />
+          </div>
         </div>
-        <Textarea placeholder="Type your message here." className="h-40" />
+        <div className="w-full flex flex-col gap-2">
+          <Label htmlFor="message">Message</Label>
+          <Textarea
+            placeholder="Type your message here."
+            id="message"
+            className="h-40"
+          />
+        </div>
         <Button className="self-end cursor-pointer bg-brandBg">
           Send Message
         </Button>

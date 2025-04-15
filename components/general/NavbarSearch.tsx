@@ -47,7 +47,7 @@ const NavbarSearch = () => {
   };
 
   return (
-    <div className="flex items-center  ">
+    <div className="flex items-center justify-between  ">
       <input
         type="text"
         name="search"

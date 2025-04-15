@@ -31,7 +31,7 @@ const aboutPageFeatures = [
 ];
 const AboutPageCards = () => {
   return (
-    <div className="flex items-center justify-between gap-4 pt-20">
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:flex items-center justify-center gap-4 pt-20">
       {aboutPageFeatures.map((feature) => (
         <div
           className="flex flex-col gap-6 items-center justify-center border border-gray-300 rounded-md p-16 shadow-2xl "

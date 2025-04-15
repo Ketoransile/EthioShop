@@ -114,14 +114,14 @@ export default function CheckoutPage() {
       <form
         // action={checkoutAction}
         onSubmit={form.handleSubmit(onSubmit)}
-        className="  gap-20 pt-20 px-20 "
+        className="  gap-20 pt-10 lg:pt-20 px-10 lg:px-20 "
       >
         {" "}
         <div className="w-full flex flex-col gap-16">
           <h1 className="text-2xl font-bold text-center ">
             Billing <span className="text-brandBg">Details</span>
           </h1>
-          <div className="grid grid-cols-2 gap-x-10 gap-y-10">
+          <div className="grid lg:grid-cols-2 gap-x-10 gap-y-4 lg:gap-y-10">
             {" "}
             {Object.keys(form.formState.errors).length > 0 && (
               <div className="text-red-500 p-4 mb-4 border border-red-500 rounded col-span-2">

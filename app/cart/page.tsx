@@ -39,12 +39,12 @@ export default function CartPage() {
           Update Cart
         </Button>
       </div>
-      <div className="flex justify-between">
-        <div className="w-full flex gap-4">
+      <div className="flex max-lg:flex-col max-lg:gap-4 justify-between">
+        <div className="w-full flex max-lg:justify-between gap-4">
           <Input type="text" placeholder="Coupon Code" className="w-1/2" />
           <Button className="bg-brandBg">Apply Coupon</Button>
         </div>
-        <div className="w-1/3 border border-gray-600 px-4 py-6 rounded-md">
+        <div className="lg:w-1/2 border border-gray-300 px-4 py-6 drop-shadow-lg shadow-gray-300 rounded-xl">
           <div className="flex flex-col gap-6">
             <h1 className="text-black font-bold">Cart Total</h1>
             <div className="flex justify-between py-2 border-b border-b-gray-600">
@@ -53,7 +53,7 @@ export default function CartPage() {
             </div>
             <div className="flex justify-between py-2 border-b border-b-gray-600">
               <h1 className="text-gray-500">Shipping</h1>
-              <h1 className="text-gray-500">0</h1>
+              <h1 className="text-gray-500">free</h1>
             </div>
             <div className="flex justify-between py-2 ">
               <h1 className="text-gray-500">Total</h1>

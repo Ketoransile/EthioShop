@@ -10,8 +10,10 @@ const MyAccountNavigation = () => {
       {/* <div className="grid grid-cols-2"> */}
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
-          <h1 className="font-semibold text-lg">Manage My Account</h1>
-          <div className="flex flex-col gap-2 px-8 text-gray-500">
+          <h1 className="font-bold text-lg text-center">
+            Manage <span className="text-brandBg">My Account</span>
+          </h1>
+          <div className="flex lg:flex-col lg:gap-2 max-lg:gap-10 px-8 text-gray-500 items-center justify-center max-lg:text-md">
             <Link href="/profile">My Profile</Link>
             <Link href="/my-orders">My Orders</Link>{" "}
             <Link href="/wish-list">My Favourites</Link>
@@ -19,18 +21,6 @@ const MyAccountNavigation = () => {
             {/* <Link href="/my-payment-option">My Payment Options</Link> */}
           </div>
         </div>
-        {/* <div className="flex flex-col gap-4 ">
-            <h1 className="font-semibold text-lg">Manage Orders</h1>
-            <div className="flex flex-col gap-2 px-8 text-gray-500">
-              <Link href="/my-orders">My Orders</Link>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4">
-            <h1 className="font-semibold text-lg"> My WishList</h1>
-            <div className="flex flex-col gap-2 px-8 text-gray-500">
-              <Link href="/wish-list">My Favourites</Link>
-            </div>
-          </div> */}
       </div>
     </div>
     // </div>

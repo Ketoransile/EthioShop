@@ -61,7 +61,7 @@ function CartTableRow({ item }: { item: CartItem }) {
   return (
     <TableRow key={item.name}>
       <TableCell className=" ">
-        <div className="flex gap-4 items-center ">
+        <div className="flex max-lg:flex-col gap-4 lg:items-center ">
           <Image
             src={item.imageUrl}
             alt={item.name}

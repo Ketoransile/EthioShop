@@ -55,7 +55,7 @@ export const BestSellingList = async () => {
         Best Selling Products
       </h1>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
         {products.slice(0, 10).map((product) => (
           <ProductCard product={product} key={product.title} />
         ))}
