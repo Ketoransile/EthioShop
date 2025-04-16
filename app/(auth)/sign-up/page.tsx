@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 // import { Input } from "@/components/ui/input";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import sideImage from "../../../assets/sideImage.jpg";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -156,12 +156,6 @@ export default function SignUp() {
               disabled={isLoading}
             >
               {isLoading ? "Please Wait..." : "Create Account"}
-            </Button>
-            <Button variant="outline">
-              <div className="flex items-center gap-2 justify-center">
-                <FcGoogle size={24} />
-                <p>Sign Up with Google</p>
-              </div>
             </Button>
           </div>
           <p className="text-center">

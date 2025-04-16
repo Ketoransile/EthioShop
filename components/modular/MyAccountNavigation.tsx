@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const MyAccountNavigation = () => {
   return (
-    <div className="flex flex-col pt-20">
+    <div className="flex flex-col pt-6 lg:pt-20">
       {/* <h1 className="text-lg font-bold self-end pb-12">
         Welcome! <span className="text-brandBg ">User</span>
       </h1> */}
@@ -13,7 +13,7 @@ const MyAccountNavigation = () => {
           <h1 className="font-bold text-lg text-center">
             Manage <span className="text-brandBg">My Account</span>
           </h1>
-          <div className="flex lg:flex-col lg:gap-2 max-lg:gap-10 px-8 text-gray-500 items-center justify-center max-lg:text-md">
+          <div className="flex lg:flex-col lg:gap-2 max-lg:gap-10 px-8 text-gray-500 items-center justify-center max-lg:text-xs">
             <Link href="/profile">My Profile</Link>
             <Link href="/my-orders">My Orders</Link>{" "}
             <Link href="/wish-list">My Favourites</Link>

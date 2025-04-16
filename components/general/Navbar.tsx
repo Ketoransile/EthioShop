@@ -51,10 +51,10 @@ export const Navbar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <motion.span
-              className="text-lg lg:text-2xl font-bold"
+              className="text-lg lg:text-2xl font-bold max-lg:px-2"
               whileHover={{ scale: 1.05 }}
             >
-              Ethio<span className="text-blue-600">shop</span>
+              Ethio<span className="text-blue-600 ">shop</span>
             </motion.span>
             {/* <Image
               src="/logo1.png"
@@ -176,7 +176,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white border drop-shadow-lg  border-gray-200 rounded-2xl"
+            className="lg:hidden bg-white border drop-shadow-lg  border-gray-200 rounded-none"
           >
             <div className="flex flex-wrap items-center justify-between">
               <div className="w-full px-4 py-3 space-y-4">

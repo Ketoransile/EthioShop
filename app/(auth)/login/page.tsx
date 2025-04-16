@@ -18,7 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { authClient } from "@/lib/auth-client";
+import { authClient, signInWithGoogle } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useState } from "react";
 const formSchema = z.object({
@@ -35,6 +35,9 @@ export default function LoginPage() {
       password: "",
     },
   });
+  const handleGoogleSignin = async () => {
+    await signInWithGoogle();
+  };
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true);
@@ -59,9 +62,11 @@ export default function LoginPage() {
       );
       if (error) {
         toast.error(error.message || "Sign in Failed. Please try again.");
+        setIsLoading(false);
         return;
       }
       toast.success("Signed in successfully. Redirecting....");
+      setIsLoading(false);
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again.");
       console.error(error);
@@ -130,7 +135,12 @@ export default function LoginPage() {
             >
               {isLoading ? "Please wait..." : "Login"}
             </Button>
-            <Button variant="outline">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleGoogleSignin}
+              className="cursor-pointer"
+            >
               <div className="flex items-center gap-2 justify-center">
                 <FcGoogle size={24} />
                 <p>Sign In with Google</p>

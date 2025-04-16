@@ -13,13 +13,15 @@ const OrderOverviewCard = ({ order }) => {
   };
   return (
     <div className="flex flex-col gap-4 rounded-2xl bg-white  p-10 max-h-[800px] hover:shadow-lg hover:drop-shadow-sm hover:shadow-blue-500 shadow-none ">
-      <div className="flex items-center justify-between">
+      <div className="flex max-lg:flex-col gap-4 lg:items-center lg:justify-between">
         <div className="flex flex-col gap-2">
-          <h1 className="text-gray-400 font-sm">Order ID</h1>
-          <h2 className="text-black text-xl font-bold italic">#{order._id}</h2>
+          <h1 className="text-gray-400 font-xs">Order ID</h1>
+          <h2 className="text-black text-xl font-bold italic -mt-4">
+            #{order._id}
+          </h2>
         </div>
         <div className="flex gap-4 items-center ">
-          <div className="text-gray-400 border   text-xs p-2 border-gray-300 rounded-full">
+          <div className="text-gray-400 border   text-xs p-2 border-gray-300 rounded-full text-center">
             Estimated Arrival: 28 may 2025
           </div>
           <Button
@@ -30,7 +32,7 @@ const OrderOverviewCard = ({ order }) => {
           </Button>
         </div>
       </div>
-      <div className="grid grid-cols-2 max-h-48 gap-10  p-2 pb-10   overflow-y-auto border border-gray-300 rounded-2xl">
+      <div className="grid md:grid-cols-2 max-h-48 gap-10  p-2 pb-10   overflow-y-auto border border-gray-300 rounded-2xl">
         {order.products.map((product) => (
           <div className="flex gap-4 items-center " key={product.productId}>
             <Image

@@ -51,15 +51,15 @@ export default function ProductsDetailPage({ product }: { product: IProduct }) {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-12">
-      <div className="flex flex-col gap-10 items-center justify-center ">
+    <div className="grid lg:grid-cols-2 gap-12">
+      <div className="flex flex-col lg:gap-10 items-center lg:justify-center ">
         <div className=" flex flex-col gap-4 pt-20">
           <Image
             src={product.thumbnailImage}
             alt="Product Thumbnail"
             width={200}
             height={200}
-            className=" object-cover"
+            className=" object-cover max-lg:w-32 max-lg:h-auto"
           />
         </div>
         <div className="flex gap-4 items-center pt-20">
@@ -70,12 +70,12 @@ export default function ProductsDetailPage({ product }: { product: IProduct }) {
               width={100}
               height={100}
               alt="Product Thumbnail"
-              className="object-cover cursor-pointer rounded-md"
+              className="object-cover cursor-pointer rounded-md max-lg:w-20 max-lg:h-auto"
             />
           ))}
         </div>
       </div>
-      <div className="flex flex-col gap-6 pt-20">
+      <div className="flex flex-col gap-6 lg:pt-20">
         <h1 className="text-2xl font-bold">
           {product.title.split(" ").slice(0, 3).join(" ")}
         </h1>

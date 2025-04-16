@@ -66,7 +66,7 @@ export default function MyOrders() {
 
   return (
     <div className="my-orders pt-20 w-full">
-      <h1 className="text-2xl font-bold pb-4 ">
+      <h1 className="text-2xl font-bold pb-4 max-lg:text-center">
         My <span className="text-brandBg">Orders</span>
       </h1>
       {loading && <p>Loading orders...</p>} {/* Show loading state */}

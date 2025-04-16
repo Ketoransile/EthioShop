@@ -1,32 +1,24 @@
-import * as dotenv from "dotenv";
-dotenv.config();
-
 import mongoose from "mongoose";
 
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+const connection: { isConnected?: number } = {};
 
 async function connectDB() {
-  if (cached.conn) {
-    return cached.conn;
+  if (connection.isConnected) {
+    console.log("DB already connected.");
+    return;
   }
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-    const uri = process.env.MONGODB_URL;
-    if (!uri) throw new Error("MONGODB_URL not set in .env");
-    cached.promise = mongoose
-      .connect(`${process.env.MONGODB_URL}`, opts)
-      .then((mongoose) => {
-        console.log("DB connnected successfully");
-        return mongoose;
-      });
+
+  // console.log("MONGODB_URL from .env.local is ", process.env.MONGODB_URL);
+
+  try {
+    const db = await mongoose.connect(process.env.MONGODB_URL!);
+    connection.isConnected = db.connections[0].readyState;
+    console.log("DB connected successfully!");
+  } catch (error) {
+    console.error("Error connecting to DB:", error);
+    // Optionally, you might want to throw the error again or handle it differently
+    throw error;
   }
-  cached.conn = await cached.promise;
-  return cached.conn;
 }
+
 export default connectDB;
