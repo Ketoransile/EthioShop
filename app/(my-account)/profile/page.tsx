@@ -257,6 +257,12 @@ const formSchema = z
       path: ["confirmPassword"],
     }
   );
+interface UpdateData {
+  name: string;
+  email: string;
+  currentPassword: string;
+  newPassword: string;
+}
 
 export default function MyAccountPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -291,7 +297,7 @@ export default function MyAccountPage() {
         }
         const firstAccount = accounts[0];
         // Determine authentication type
-        const hasPasswordAuth = session.user.providers?.includes("credential");
+        const hasPasswordAuth = firstAccount?.includes("credential");
         setIsPasswordUser(hasPasswordAuth);
 
         form.reset({
@@ -313,9 +319,11 @@ export default function MyAccountPage() {
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const updateData: any = {
+      const updateData: UpdateData = {
         name: values.username,
         email: values.email,
+        currentPassword: values.currentPassword,
+        newPassword: values.newPassword,
       };
 
       if (isPasswordUser) {
