@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { FiUser } from "react-icons/fi";
+// import { FiUser } from "react-icons/fi";
 import { LuUser } from "react-icons/lu";
 import { IoHomeOutline } from "react-icons/io5";
 import { authClient } from "@/lib/auth-client";
@@ -50,10 +50,10 @@ export function NavbarProfileDropdown() {
         // collisionPadding={16}
         // avoidCollisions={true}
       >
-        <DropdownMenuLabel>Manage My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem asChild>
+          {/* <DropdownMenuItem asChild>
             <Link
               href="/profile"
               className="flex items-center gap-4 cursor-pointer"
@@ -61,7 +61,7 @@ export function NavbarProfileDropdown() {
               <FiUser size={24} />
               <p>My Profile</p>
             </Link>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem asChild>
             <Link
               href="/my-orders"

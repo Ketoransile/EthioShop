@@ -7,12 +7,12 @@ import { NavbarProfileDropdown } from "../modular/NavbarProfileDropdown";
 import { authClient } from "@/lib/auth-client";
 import { useCartStore } from "@/store/cart-store";
 import { useWishStore } from "@/store/wishlist-store";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import NavbarSearch from "./NavbarSearch";
 import { Suspense, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 
 export const navLinks = [
   { name: "Home", href: "/" },
@@ -24,7 +24,7 @@ export const navLinks = [
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
+  // const router = useRouter();
   const { items } = useCartStore();
   const { wishItems } = useWishStore();
   const numberOfWishItems = wishItems.length;
@@ -34,16 +34,16 @@ export const Navbar = () => {
   );
 
   const { data: session } = authClient.useSession();
-  const handleLogout = async () => {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          toast.success("Logout successful");
-          router.push("/login"); // redirect to login page
-        },
-      },
-    });
-  };
+  // const handleLogout = async () => {
+  //   await authClient.signOut({
+  //     fetchOptions: {
+  //       onSuccess: () => {
+  //         toast.success("Logout successful");
+  //         router.push("/login"); // redirect to login page
+  //       },
+  //     },
+  //   });
+  // };
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/60 border lg:border-gray-200 shadow-lg  rounded-full mt-10">
       <div className="container mx-auto px-4 sm:px-2 lg:px-8 ">
@@ -210,9 +210,10 @@ export const Navbar = () => {
                           )}
                         </Link>
                       </div>
-                      <Button onClick={handleLogout} className="">
+                      {/* <Button onClick={handleLogout} className="">
                         Logout
-                      </Button>
+                      </Button> */}{" "}
+                      <NavbarProfileDropdown />
                     </div>
                   ) : (
                     <div className="flex space-x-3 pt-4">
