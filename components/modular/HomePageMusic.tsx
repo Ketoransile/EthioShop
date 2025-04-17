@@ -7,7 +7,7 @@ export const HomePageMusic = () => {
   const router = useRouter();
   return (
     <div className="pt-20">
-      <div className="flex max-lg:flex-col  gap-10 max-lg:gap-4 items-center justify-between px-4 lg:px-20  pb-10 pt-20 bg-black">
+      <div className="flex max-lg:flex-col  gap-10 max-lg:gap-4 items-center justify-between px-4 lg:px-20  pb-10 pt-20 bg-black overflow-hidden">
         <div className="flex flex-col gap-4 lg:gap-12">
           <p className="text-sm font-bold text-brandBg max-lg:text-center">
             Categories
@@ -31,7 +31,7 @@ export const HomePageMusic = () => {
           width={800}
           height={800}
           alt="music-icon"
-          className="rounded-xl"
+          className="rounded-xl stretch lg:h-96 "
         />
       </div>
     </div>

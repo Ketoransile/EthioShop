@@ -36,6 +36,7 @@ export default function LoginPage() {
     },
   });
   const handleGoogleSignin = async () => {
+    console.log("Button clicked");
     await signInWithGoogle();
   };
   async function onSubmit(values: z.infer<typeof formSchema>) {

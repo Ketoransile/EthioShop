@@ -6,6 +6,8 @@ import { Footer } from "@/components/general/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { Inter } from "next/font/google";
 import { Montserrat, Roboto_Mono } from "next/font/google";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
   variable: "--font-roboto-mono",

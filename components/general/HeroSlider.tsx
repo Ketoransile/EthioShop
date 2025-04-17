@@ -57,13 +57,16 @@ export const HeroSlider = () => {
     >
       <CarouselContent>
         {heroSliderData.map((heroSlider) => (
-          <CarouselItem key={heroSlider.id} className="text-white w-full">
+          <CarouselItem
+            key={heroSlider.id}
+            className="text-white w-full max-lg:hidden"
+          >
             <Link
               href="/"
               className="relative bg-black flex items-center justify-center w-full   "
               key={heroSlider.id}
             >
-              <div className="absolute flex flex-col gap-4 pt-20 items-center justify-center">
+              <div className="max-lg:hidden absolute flex flex-col gap-4 pt-20 items-center justify-center">
                 <p className="text-7xl font-bold">{heroSlider.title}</p>
                 <p className="text-lg font-bold">{heroSlider.description}</p>
               </div>
@@ -73,7 +76,7 @@ export const HeroSlider = () => {
                   alt="heroSliderImage"
                   width={200}
                   height={100}
-                  className="w-full h-96"
+                  className="w-full lg:h-96"
                   key={index}
                 />
               ))}

@@ -1,6 +1,7 @@
 import { dummyCategories } from "@/lib/dummyData";
 import Link from "next/link";
 import { TbRectangleVerticalFilled } from "react-icons/tb";
+import { CategoriesListMobileCarousel } from "./CategoriesListMobileCarousel";
 export const CategoriesList = () => {
   return (
     <div className="flex flex-col gap-4 pt-20">
@@ -12,7 +13,7 @@ export const CategoriesList = () => {
         Browse By Categories
       </h1>
 
-      <div className="grid grid-cols-3 w-full gap-y-4 justify-between lg:flex items-center  pt-20 ">
+      <div className="hidden lg:grid grid-cols-4 lg:grid-cols-6 items-center gap-2     pt-20 ">
         {dummyCategories.map((category, index) => (
           <Link
             href={`/products${category.href}`}
@@ -24,6 +25,9 @@ export const CategoriesList = () => {
             <p>{category.name}</p>
           </Link>
         ))}
+      </div>
+      <div className="w-full mx-auto ">
+        <CategoriesListMobileCarousel />
       </div>
     </div>
   );

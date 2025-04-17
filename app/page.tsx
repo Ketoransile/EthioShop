@@ -7,6 +7,7 @@ import { HomePageProductsList } from "@/components/general/HomePageProductsList"
 import { HomePageMusic } from "@/components/modular/HomePageMusic";
 import BestSellingSkeleton from "@/components/skeletons/BestSellingSkeleton";
 import HomePageProductsListSekeleton from "@/components/skeletons/HomePageProductsListSekeleton";
+// import Image from "next/image";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -15,6 +16,16 @@ export default function Home() {
       <div className="max-lg:hidden">
         <HeroSlider />
       </div>
+      {/* <div className="lg:hidden flex justify-center -mx-4 md:-mx-12 ">
+        <Image
+          src="/leonardo/img3.jpg"
+          width={800}
+          height={800}
+          alt="homepage-image"
+          className="rounded-xl "
+        />
+      </div> */}
+
       <CategoriesList />
       <Suspense fallback={<BestSellingSkeleton />}>
         <BestSellingList />
