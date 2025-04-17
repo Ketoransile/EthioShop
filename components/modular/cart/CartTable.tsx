@@ -80,23 +80,25 @@ function CartTableRow({ item }: { item: CartItem }) {
         </div>
       </TableCell>
       <TableCell className="font-medium">${item.price}</TableCell>
-      <TableCell className="flex item-center">
-        <Button
-          className="rounded-none rounded-l-xl bg-gray-200 cursor-pointer text-black hover:text-white"
-          onClick={() => handleDecreaseQuantity(item.id)}
-        >
-          -
-        </Button>
+      <TableCell className="">
+        <div className="flex items-center">
+          <Button
+            className="rounded-none rounded-l-xl bg-gray-200 cursor-pointer text-black hover:text-white"
+            onClick={() => handleDecreaseQuantity(item.id)}
+          >
+            -
+          </Button>
 
-        <div className="lg:w-10 text-center my-auto border-gray-500">
-          {item.quantity}
+          <div className="lg:w-10 px-4 flex items-center text-center my-auto border-gray-500">
+            {item.quantity}
+          </div>
+          <Button
+            className="rounded-none rounded-r-xl bg-brandBg cursor-pointer"
+            onClick={() => handleIncreaseQuantity(item, item.id)}
+          >
+            +
+          </Button>
         </div>
-        <Button
-          className="rounded-none rounded-r-xl bg-brandBg cursor-pointer"
-          onClick={() => handleIncreaseQuantity(item, item.id)}
-        >
-          +
-        </Button>
       </TableCell>
       <TableCell>${subTotal}</TableCell>
       <TableCell>
