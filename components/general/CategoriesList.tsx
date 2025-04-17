@@ -26,7 +26,7 @@ export const CategoriesList = () => {
           </Link>
         ))}
       </div>
-      <div className="w-full mx-auto ">
+      <div className="w-full mx-auto lg:hidden">
         <CategoriesListMobileCarousel />
       </div>
     </div>

@@ -1,4 +1,7 @@
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";import { Checkbox } from "@/components/ui/checkbox"
+import { Checkbox } from "@/components/ui/checkbox";
+
 import {
   Table,
   TableBody,
@@ -11,77 +14,94 @@ import {
 } from "@/components/ui/table";
 import { CartItem, useCartStore } from "@/store/cart-store";
 import Image from "next/image";
-import { useState } from "react";
+// import { useState } from "react";
 
 export function CartTable() {
   const { items } = useCartStore();
 
   return (
     <Table>
-      {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
       <TableHeader>
         <TableRow>
           <TableHead className="">Product</TableHead>
           <TableHead>Price</TableHead>
           <TableHead>Quantity</TableHead>
           <TableHead className="">Subtotal</TableHead>
+          <TableHead className="">Select</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {/* {invoices.map((invoice) => ( */}
         {items.map((item: CartItem) => (
-          // <ProductCard item={item} key={item.title} />
           <CartTableRow item={item} key={item.id} />
         ))}
-        {/* ))} */}
       </TableBody>
-      {/* <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter> */}
     </Table>
   );
 }
 
 function CartTableRow({ item }: { item: CartItem }) {
-  const { removeItem } = useCartStore();
-  const { updateItemQuantity } = useCartStore();
-  const [quantity, setQuantity] = useState(item.quantity);
+  const { items, addItem, removeItem, increaseQuantity, decreaseQuantity } =
+    useCartStore();
+
   const subTotal = parseFloat((item.price * item.quantity).toFixed(2));
-  const onQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = Math.max(0, parseInt(e.target.value) || 0);
-    setQuantity(newQuantity);
-    if (newQuantity === 0) {
-      removeItem(item.id);
+
+  const handleIncreaseQuantity = (item: CartItem, itemId: string) => {
+    const cartItem = items.find((i) => i.id === itemId);
+    if (cartItem) {
+      increaseQuantity(itemId);
+    } else {
+      addItem(item);
     }
-    updateItemQuantity(item.id, newQuantity);
   };
+
+  const handleDecreaseQuantity = (itemId: string) => {
+    const cartItem = items.find((i) => i.id === itemId);
+    if (cartItem) {
+      if (cartItem.quantity > 1) {
+        decreaseQuantity(itemId);
+      } else {
+        removeItem(itemId);
+      }
+    }
+  };
+
   return (
-    <TableRow key={item.name}>
-      <TableCell className=" ">
-        <div className="flex max-lg:flex-col gap-4 lg:items-center ">
+    <TableRow>
+      <TableCell>
+        <div className="flex max-lg:flex-col gap-4 lg:items-center">
           <Image
             src={item.imageUrl}
             alt={item.name}
             width={100}
             height={100}
-            className=" h-12 w-12 rounded-md"
+            className="h-12 w-12 rounded-md"
           />
           {item.name.split(" ").slice(0, 2).join(" ")}
         </div>
       </TableCell>
       <TableCell className="font-medium">${item.price}</TableCell>
-      <TableCell>
-        <Input
-          type="number"
-          value={quantity}
-          onChange={onQuantityChange}
-          className="max-w-20 max-h-20 [&::-webkit-inner-spin-button]:opacity-100"
-        />
+      <TableCell className="flex item-center">
+        <Button
+          className="rounded-none rounded-l-xl bg-gray-200 cursor-pointer text-black hover:text-white"
+          onClick={() => handleDecreaseQuantity(item.id)}
+        >
+          -
+        </Button>
+
+        <div className="lg:w-10 text-center my-auto border-gray-500">
+          {item.quantity}
+        </div>
+        <Button
+          className="rounded-none rounded-r-xl bg-brandBg cursor-pointer"
+          onClick={() => handleIncreaseQuantity(item, item.id)}
+        >
+          +
+        </Button>
       </TableCell>
       <TableCell>${subTotal}</TableCell>
+      <TableCell>
+        <Checkbox />
+      </TableCell>
     </TableRow>
   );
 }

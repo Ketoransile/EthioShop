@@ -10,7 +10,7 @@ import { useCartStore } from "@/store/cart-store";
 import { Document } from "mongoose";
 import Link from "next/link";
 import FavouriteHeartButton from "../modular/FavouriteHeartButton";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 interface Price {
   value: number;
   currency: string;
@@ -29,25 +29,38 @@ interface IProduct extends Document {
   inStock: boolean;
 }
 export default function ProductsDetailPage({ product }: { product: IProduct }) {
-  const router = useRouter();
+  // const router = useRouter();
   const numStars = Math.floor(product?.stars) || 0;
 
-  const { items, addItem, removeItem } = useCartStore();
+  const { items, addItem, removeItem, increaseQuantity, decreaseQuantity } =
+    useCartStore();
   const cartItem = items.find((item) => item.id === product._id);
   const quantity = cartItem ? cartItem.quantity : 0;
   const onAddItem = () => {
-    addItem({
-      id: product._id,
-      name: product.title,
-      price: product.price?.value || 0,
-      imageUrl: product.highResolutionImages
-        ? product.highResolutionImages[0]
-        : product.thumbnailImage || "",
-      quantity: 1,
-    });
+    const cartItem = items.find((i) => i.id === product._id);
+    if (cartItem) {
+      increaseQuantity(product._id);
+    } else {
+      addItem({
+        id: product._id,
+        name: product.title,
+        price: product.price?.value || 0,
+        imageUrl: product.highResolutionImages
+          ? product.highResolutionImages[0]
+          : product.thumbnailImage || "",
+        quantity: 1,
+      });
+    }
   };
   const onRemoveItem = () => {
-    removeItem(product._id);
+    const cartItem = items.find((i) => i.id === product._id);
+    if (cartItem) {
+      if (cartItem.quantity > 1) {
+        decreaseQuantity(product._id);
+      } else {
+        removeItem(product._id);
+      }
+    }
   };
 
   return (
@@ -126,10 +139,10 @@ export default function ProductsDetailPage({ product }: { product: IProduct }) {
             </Button>
             <FavouriteHeartButton product={product} />
           </div>
-          <Link href="/">
+          <Link href="/cart">
             <Button
               className="bg-brandBg cursor-pointer"
-              onClick={() => router.push("/cart")}
+              // onClick={() => router.push("/cart")}
             >
               Buy Now
             </Button>
