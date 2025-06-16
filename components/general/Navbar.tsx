@@ -46,11 +46,11 @@ export const Navbar = () => {
   // };
   return (
     <header
-      className="sticky top-10 z-50 
-  backdrop-blur-xl bg-white/30 
-  border lg:border-gray-200 shadow-lg rounded-full max-lg:rounded-xl
-  mt-10 
-  max-lg:backdrop-blur-none max-lg:bg-white"
+      className="sticky top-0 z-50 
+ bg-white 
+  border lg:border-gray-200 shadow-lg  px-4 md:px-12 lg:px-20
+ 
+  "
     >
       <div className="container mx-auto px-4 sm:px-2 lg:px-8 ">
         <div className="flex items-center justify-between h-16 md:h-20">

@@ -48,13 +48,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`px-4 md:px-12 lg:px-20 ${robotoMono.variable} ${geistSans.variable} ${montserrat.variable} ${geistMono.variable} ${inter.variable} antialiased`}
-      >
+      <body>
         <Navbar />
-        {children}
-        <Toaster />
-        <Footer />
+        <div
+          className={`px-4 md:px-12 lg:px-20 ${robotoMono.variable} ${geistSans.variable} ${montserrat.variable} ${geistMono.variable} ${inter.variable} antialiased`}
+        >
+          {children}
+          <Toaster />
+          <Footer />
+        </div>{" "}
       </body>
     </html>
   );
