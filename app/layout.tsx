@@ -48,20 +48,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
         <Navbar />
         <div
           className={`px-4 md:px-12 lg:px-20 ${robotoMono.variable} ${geistSans.variable} ${montserrat.variable} ${geistMono.variable} ${inter.variable} antialiased`}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          {children}
           <Toaster />
           <Footer />
         </div>{" "}

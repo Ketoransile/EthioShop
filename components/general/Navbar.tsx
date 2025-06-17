@@ -12,7 +12,7 @@ import NavbarSearch from "./NavbarSearch";
 import { Suspense, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
-import { ToggleTheme } from "./ToggleTheme";
+// import { ToggleTheme } from "./ToggleTheme";
 // import { toast } from "sonner";
 
 export const navLinks = [
@@ -128,6 +128,7 @@ export const Navbar = () => {
                     </span>
                   )}
                 </Link>
+
                 <Link href="/cart" className="relative p-1">
                   <IoCartOutline
                     size={28}
@@ -139,8 +140,8 @@ export const Navbar = () => {
                     </span>
                   )}
                 </Link>
+
                 <NavbarProfileDropdown />
-                {/* <ToggleTheme /> */}
               </div>
             ) : (
               <div className="flex items-center space-x-3">
@@ -160,7 +161,6 @@ export const Navbar = () => {
                     Sign Up
                   </Button>
                 </Link>
-                {/* <ToggleTheme /> */}
               </div>
             )}
           </div>
