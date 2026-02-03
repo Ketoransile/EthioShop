@@ -1,153 +1,144 @@
 "use client";
 import Image from "next/image";
-import { FaCartPlus } from "react-icons/fa6";
+import { FaCartPlus, FaStar } from "react-icons/fa";
 import { MdRemoveShoppingCart } from "react-icons/md";
-// import { CiHeart } from "react-icons/ci";
-import { FaStar } from "react-icons/fa";
-// import { FaHeartCirclePlus } from "react-icons/fa6";
-// import { FaHeartCircleXmark } from "react-icons/fa6";
-// import { FaHeart } from "react-icons/fa";
-// import { Button } from "../ui/button";
 import { useCartStore } from "@/store/cart-store";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-// import { useWishStore } from "@/store/wishlist-store";
 import FavouriteHeartButton from "./FavouriteHeartButton";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
-export const ProductCard = ({ product }) => {
-  // const { wishItems } = useWishStore();
-  // const isWishItem = wishItems.find((item) => item._id === product._id);
+// Define simplified local interface
+interface Product {
+  _id: string;
+  title: string;
+  thumbnailImage: string;
+  price?: { value: number };
+  listPrice?: { value: number };
+  stars: number;
+  highResolutionImages?: string[];
+  [key: string]: unknown;
+}
+
+export const ProductCard = ({ product }: { product: Product }) => {
   const { items, removeItem, addItem } = useCartStore();
   const cartItem = items.find((item) => item.id === product._id);
   const numStars = Math.floor(product?.stars) || 0;
   const listPrice = product.listPrice?.value || 0;
   const price = product.price?.value || 0;
+
+  // Calculate discount percentage
   const discount =
-    listPrice > price ? Math.floor(((listPrice - price) / listPrice) * 100) : 0;
+    listPrice > price
+      ? Math.round(((listPrice - price) / listPrice) * 100)
+      : 0;
+
   const isDiscounted = discount > 0;
-  const truncateTitle = (title: string): string => {
-    return title.length > 30 ? title.substring(0, 20) + "..." : title;
+
+  // Handler for adding/removing from cart
+  const handleCartAction = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const { data: session } = await authClient.getSession();
+    if (!session) {
+      toast.error("Please login to manage cart!");
+      return redirect("/login");
+    }
+
+    if (cartItem) {
+      removeItem(product._id);
+      toast.info("Removed from cart");
+    } else {
+      addItem({
+        id: product._id,
+        name: product.title,
+        price: product.price?.value || 0,
+        imageUrl: product.highResolutionImages?.[0] || product.thumbnailImage || "",
+        quantity: 1,
+      });
+      toast.success("Added to cart");
+    }
   };
 
   return (
-    <div className="relative w-full flex flex-col hover:drop-shadow-sm hover:shadow-blue-500 border-b rounded-xl border-gray-100 hover:border-none shadow-md  shadow-gray-200">
-      <Link
-        href={`/products/${product._id}`}
-        // className="hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-      >
-        <div className="relative  flex items-center justify-center   h-60 w-full overflow-hidden border rounded-2xl">
+    <div className="group relative w-full h-full flex flex-col rounded-xl border border-border/50 bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden">
+      <Link href={`/products/${product._id}`} className="flex-1 flex flex-col">
+        {/* Image Container */}
+        <div className="relative aspect-square w-full overflow-hidden bg-muted/20">
           <Image
             src={product.thumbnailImage}
-            width={200}
-            height={200}
             alt={product.title}
-            className="stretch object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+            fill
+            className="object-contain p-4 transition-transform duration-500 group-hover:scale-110"
           />
+
+          {/* Discount Badge */}
+          {isDiscounted && (
+            <Badge variant="destructive" className="absolute top-3 left-3 px-2 py-1 text-xs font-bold shadow-md">
+              -{discount}%
+            </Badge>
+          )}
+
+          {/* Quick Actions Overlay (Desktop) */}
+          <div className="absolute right-3 top-3 flex flex-col gap-2 opacity-0 transform translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+            <div className="bg-background/80 backdrop-blur-md rounded-full shadow-sm hover:bg-background transition-colors">
+              <FavouriteHeartButton product={product} />
+            </div>
+          </div>
         </div>
 
-        <div className="w-full flex flex-col  pt-4 pb-4 px-4 ">
-          <p className="font-bold text-sm text-gray-600">
-            {truncateTitle(product.title.split(" ").slice(0, 4).join(" "))}
-          </p>
-          <div className="w-full flex flex-col  ">
-            {" "}
-            <div className=" flex items-center gap-2">
-              <p className=" font-bold col-span-2 text-xl text-black">
-                ${product.price?.value}
-              </p>
-              {isDiscounted && (
-                <p className="text-slate-400 line-through">
-                  ${product.listPrice?.value}
-                </p>
-              )}
-            </div>
-            <div className=" flex flex-wrap items-center gap-2">
-              <div className="flex gap-1">
-                <div className="flex items-center justify-between ">
-                  {[...Array(5)].map((_, index) => (
-                    <span key={index}>
-                      {index < numStars ? (
-                        <FaStar size={12} className="text-yellow-400" />
-                      ) : (
-                        <FaStar size={12} className="text-slate-200" />
-                      )}
-                    </span>
-                  ))}
-                </div>
-                <p className="text-sm font-bold">{`(${product.stars})`}</p>
-              </div>
-              <div className="">
-                {" "}
-                <FavouriteHeartButton product={product} />
-              </div>
-              <div className="item-end p-1">
-                {cartItem ? (
-                  <button
-                    onClick={async (e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      removeItem(product._id);
-                      const { data: session } = await authClient.getSession();
-                      if (!session) {
-                        addItem({
-                          id: product._id,
-                          name: product.title,
-                          price: product.price?.value || 0,
-                          imageUrl: product.highResolutionImages
-                            ? product.highResolutionImages[0]
-                            : product.thumbnailImage || "",
-                          quantity: 1,
-                        });
-                        toast.error(
-                          "Remove from cart Failed. Please Login first!"
-                        );
-                        return redirect("/login");
-                      }
-                      toast.error("Item removed from cart.");
-                    }}
-                    // className="bg-black hover:bg-gray-800  py-2 text-white rounded-none  cursor-pointer"
-                    className="flex item-center justify-center w-fit rounded-full  p-2 bg-red-500 cursor-pointer"
-                  >
-                    <MdRemoveShoppingCart size={16} color="white" />
-                  </button>
-                ) : (
-                  <button
-                    onClick={async (e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      addItem({
-                        id: product._id,
-                        name: product.title,
-                        price: product.price?.value || 0,
-                        imageUrl: product.highResolutionImages
-                          ? product.highResolutionImages[0]
-                          : product.thumbnailImage || "",
-                        quantity: 1,
-                      });
-                      const { data: session } = await authClient.getSession();
-                      if (!session) {
-                        removeItem(product._id);
-                        toast.error("Add To Cart Failed. Please Login first!");
-                        return redirect("/login");
-                      }
-                      toast.success("Item added to cart!");
-                    }}
-                    // className="bg-brandBg hover:bg-blue-400  py-2 text-white rounded-none  cursor-pointer"
-                    className="flex item-center justify-center w-fit rounded-full  p-2 bg-brandBg cursor-pointer"
-                  >
-                    <FaCartPlus className="" size={16} color="white" />
-                    {/* <p className="text-white text-center font-bold ">Add to cart</p> */}
-                  </button>
-                )}
-              </div>
+        {/* Content */}
+        <div className="flex flex-col gap-3 p-5 flex-1 justify-between">
+          <div className="space-y-1.5">
+            <h3 className="font-semibold leading-tight tracking-tight line-clamp-2 min-h-[2.5rem] group-hover:text-primary transition-colors">
+              {product.title}
+            </h3>
 
+            {/* Rating */}
+            <div className="flex items-center gap-1">
+              <div className="flex text-yellow-400">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar key={i} size={12} className={i < numStars ? "fill-current" : "text-muted"} />
+                ))}
+              </div>
+              <span className="text-xs text-muted-foreground ml-1">({product.stars})</span>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {/* Price */}
+            <div className="flex items-baseline gap-2">
+              <span className="text-xl font-bold tracking-tight text-primary">
+                ${price.toLocaleString()}
+              </span>
               {isDiscounted && (
-                // <div className="w-fit self-end  bg-red-500 px-2  rounded-sm text-white text-sm">{`-${discount}%`}</div>
-                <div className="absolute top-4 left-0   bg-red-500 p-1  font-bold  rounded-r-sm text-white text-sm">{`-${discount}%`}</div>
+                <span className="text-sm text-muted-foreground line-through decoration-muted-foreground/50">
+                  ${listPrice.toLocaleString()}
+                </span>
               )}
             </div>
+
+            {/* Add to Cart Button */}
+            <Button
+              size="sm"
+              className={`w-full gap-2 transition-all duration-300 ${cartItem ? "bg-destructive hover:bg-destructive/90 text-destructive-foreground" : "hover:bg-primary/90"}`}
+              variant={cartItem ? "destructive" : "default"}
+              onClick={handleCartAction}
+            >
+              {cartItem ? (
+                <>
+                  <MdRemoveShoppingCart size={16} /> Remove
+                </>
+              ) : (
+                <>
+                  <FaCartPlus size={16} /> Add to Cart
+                </>
+              )}
+            </Button>
           </div>
         </div>
       </Link>

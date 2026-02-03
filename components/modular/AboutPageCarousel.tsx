@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { FaTwitter, FaInstagramSquare, FaLinkedin } from "react-icons/fa";
+import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import {
   Carousel,
   CarouselContent,
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
+import { Card, CardContent } from "../ui/card";
 
 export const testimonialsData = [
   {
@@ -27,7 +28,7 @@ export const testimonialsData = [
   {
     id: 3,
     name: "Michael Chen",
-    position: "CTO, Tech Innovations",
+    position: "CTO",
     image: "/testimonials/man2.jpg",
   },
   {
@@ -42,36 +43,6 @@ export const testimonialsData = [
     position: "Financial Analyst",
     image: "/testimonials/man1.jpg",
   },
-  {
-    id: 6,
-    name: "Jessica Kim",
-    position: "Product Manager",
-    image: "/testimonials/woman3.jpg",
-  },
-  {
-    id: 7,
-    name: "Robert Taylor",
-    position: "Operations Lead",
-    image: "/testimonials/man2.jpg",
-  },
-  {
-    id: 8,
-    name: "Amanda Smith",
-    position: "HR Director",
-    image: "/testimonials/woman4.jpg",
-  },
-  {
-    id: 9,
-    name: "James Peterson",
-    position: "Sales Executive",
-    image: "/testimonials/man1.jpg",
-  },
-  {
-    id: 10,
-    name: "Olivia Martinez",
-    position: "Customer Success Manager",
-    image: "/testimonials/woman1.jpg",
-  },
 ];
 
 export function AboutPageCarousel() {
@@ -80,51 +51,66 @@ export function AboutPageCarousel() {
   );
 
   return (
-    <div className="px-4 py-20 w-full max-w-7xl mx-auto">
+    <div className="py-20 w-full">
+      <div className="flex flex-col gap-4 mb-12 text-center">
+        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">Our Leadership Team</h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Meet the visionaries behind EthioShop&apos;s success.
+        </p>
+      </div>
+
       <Carousel
         opts={{
           align: "start",
           loop: true,
         }}
         plugins={[plugin.current]}
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.reset}
-        className="w-full"
+        className="w-full max-w-[1400px] mx-auto px-4 md:px-12"
       >
-        <CarouselContent className="-ml-4">
-          {testimonialsData.map((testimony) => (
+        <CarouselContent className="-ml-6">
+          {testimonialsData.map((person) => (
             <CarouselItem
-              key={testimony.id}
-              className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+              key={person.id}
+              className="pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4"
             >
-              <div className="bg-brandBg rounded-xl shadow-lg p-6 flex flex-col items-center gap-4 h-full">
-                <div className="relative w-64 h-64 rounded-b-full overflow-hidden">
-                  <Image
-                    src={testimony.image}
-                    alt={testimony.name}
-                    fill
-                    className="object-contain"
-                    // sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
-                  />
-                </div>
-                <div className="text-center space-y-2">
-                  <h3 className="text-xl font-semibold text-white">
-                    {testimony.name}
-                  </h3>
-                  <p className="text-gray-300">{testimony.position}</p>
-                  <div className="flex justify-center gap-3 pt-2">
-                    <FaTwitter className="text-white hover:text-blue-400 transition-colors" />
-                    <FaInstagramSquare className="text-white hover:text-pink-500 transition-colors" />
-                    <FaLinkedin className="text-white hover:text-blue-600 transition-colors" />
+              <Card className="border-none shadow-none bg-transparent group">
+                <CardContent className="p-0">
+                  <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-muted">
+                    <Image
+                      src={person.image}
+                      alt={person.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+
+                    {/* Social Overlay */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                      <a href="#" className="p-2 bg-white/20 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-sm transition-all">
+                        <FaTwitter />
+                      </a>
+                      <a href="#" className="p-2 bg-white/20 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-sm transition-all">
+                        <FaInstagram />
+                      </a>
+                      <a href="#" className="p-2 bg-white/20 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-sm transition-all">
+                        <FaLinkedinIn />
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </div>
+
+                  <div className="pt-6">
+                    <h3 className="text-2xl font-bold tracking-tight">{person.name}</h3>
+                    <p className="text-muted-foreground">{person.position}</p>
+                  </div>
+                </CardContent>
+              </Card>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="mt-6 flex justify-center gap-4">
-          <CarouselPrevious className="relative top-0 left-0 translate-x-0 translate-y-0" />
-          <CarouselNext className="relative top-0 left-0 translate-x-0 translate-y-0" />
+
+        {/* Navigation Dots (optional, or keeping arrows but styled better) */}
+        <div className="flex justify-end gap-2 mt-8 pr-12 relative">
+          <CarouselPrevious className="static translate-y-0 border-muted bg-transparent hover:bg-primary hover:text-white" />
+          <CarouselNext className="static translate-y-0 border-muted bg-transparent hover:bg-primary hover:text-white" />
         </div>
       </Carousel>
     </div>

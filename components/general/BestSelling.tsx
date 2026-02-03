@@ -1,62 +1,68 @@
 export const dynamic = "force-dynamic";
-import { TbRectangleVerticalFilled } from "react-icons/tb";
 
 import { ProductCard } from "../modular/ProductCard";
+// Define a simplified local interface just for this component to avoid 'any'
+interface Product {
+  _id: string;
+  title: string;
+  thumbnailImage: string;
+  price?: { value: number };
+  listPrice?: { value: number };
+  stars: number;
+  highResolutionImages?: string[];
+  [key: string]: unknown;
+}
 
-async function fetchBestSellings() {
+// Ensure the return type matches the expected structure of the API response
+interface ApiResponse {
+  status: number;
+  data: Product[] | null;
+}
+
+async function fetchBestSellings(): Promise<ApiResponse> {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const response = await fetch(`${baseUrl}/api/products/list`, {
       method: "GET",
-      // next: { revalidate: revalidate },
       cache: "no-store",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    // console.log(response);
+
     if (!response.ok) {
-      const status = response.status;
-      console.error(`Failed to fetch products.  Status: ${status}`);
-      return {
-        status,
-        data: null,
-        error: `Request failed with status ${status}`,
-      };
+      return { status: response.status, data: null };
     }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Fetch error:", error);
-    return {
-      status: 500,
-      data: null,
-      error: error.message || "Unknown error",
-    };
+    return await response.json();
+  } catch {
+    // Avoid unused 'error' variable
+    return { status: 500, data: null };
   }
-  // console.log("data from bessellinf: 0", data);
 }
 
 export const BestSellingList = async () => {
   const data = await fetchBestSellings();
 
   if (data.status !== 200 || !data.data || data.data.length === 0) {
-    return <div className="">No Products found</div>;
+    return null; // Don't show empty section
   }
+
   const products = data.data;
 
   return (
-    <div className="flex flex-col gap-4 pt-20">
-      <div className="flex gap-2 items-center">
-        <TbRectangleVerticalFilled size={24} className="text-blue-500" />
-        <h1 className="text-sm text-blue-500 font-bold">This Month</h1>
+    <div className="flex flex-col gap-8 py-16 px-4 md:px-0">
+      <div className="flex flex-col gap-2 relative">
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-4 bg-primary rounded-sm" />
+          <span className="font-bold text-primary">This Month</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Best Selling Products</h2>
+        </div>
       </div>
-      <h1 className="text-2xl lg:text-4xl font-semibold">
-        Best Selling Products
-      </h1>
 
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
-        {products.slice(0, 10).map((product) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        {products.slice(0, 5).map((product) => (
           <ProductCard product={product} key={product.title} />
         ))}
       </div>

@@ -1,90 +1,89 @@
-import { TbRectangleVerticalFilled } from "react-icons/tb";
-// import headset1 from "../../assets/headset1.jpg";
-// import headset from "../../assets/headset.jpg";
-// import laptop1 from "../../assets/laptop1.jpg";
-// import iphone from "../../assets/iphone.jpg";
 import asus from "../../assets/computers/asus.jpg";
 import samsung from "../../assets/computers/samsung.jpg";
-// import headsetone from "../../assets/headphone/headsetone.jpg";
 import iphone1 from "../../assets/phones/iphone1.jpg";
 import galaxywatch1 from "../../assets/smartwatch/galaxywatch1.jpg";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "../ui/button";
+
 export const HomePageFeatured = () => {
   return (
-    <div className="flex flex-col gap-4 pt-20">
-      <div className="flex gap-2 items-center">
-        <TbRectangleVerticalFilled size={24} className="text-blue-500" />
-        <h1 className="text-sm text-blue-500 font-bold">Featured</h1>
+    <div className="flex flex-col gap-8 py-12 md:py-20 px-4 md:px-0">
+      <div className="flex flex-col gap-2">
+        <div className="flex gap-2 items-center">
+          <div className="h-8 w-4 bg-primary rounded-sm" />
+          <span className="font-bold text-primary">Featured</span>
+        </div>
+        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">New Arrival</h2>
       </div>
-      <h1 className="text-2xl lg:text-2xl font-semibold">New Arrival</h1>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6  items-center justify-between pt-20">
-        <div className="relative row-span-2  ">
-          <Link className="  pb-10 " href="/products?category=smartphone">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[600px] h-auto lg:h-[600px]">
+        {/* Main large item - iPhone */}
+        <div className="bg-black text-white rounded-3xl relative overflow-hidden group col-span-1 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2 border border-white/10 shadow-2xl">
+          <Link href="/products?category=smartphone" className="block h-full w-full">
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end items-start transition-opacity duration-300">
+              <h3 className="text-3xl font-bold mb-2">iPhone 15 Pro Max</h3>
+              <p className="text-gray-300 mb-4 line-clamp-2 max-w-sm">Titanium design. A17 Pro chip. The most powerful iPhone ever built.</p>
+              <Button variant="link" className="text-white p-0 h-auto underline decoration-2 underline-offset-4 hover:text-primary transition-colors">
+                Shop Collection
+              </Button>
+            </div>
             <Image
               src={iphone1}
-              width={400}
-              height={400}
-              alt="headset-image"
-              className=" shadow-b-gray-200"
-            />
-          </Link>
-          {/* <div className="absolute backdrop-blur-2xl bg-white/60  left-10 bottom-20 flex  flex-col gap-4 max-w-64 text-white w-full stretch ">
-            <h1 className="text-2xl front-bold">Iphone 16 series</h1>
-            <p className="text-md">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            </p>
-            <Link href="/" className="border-b border-b-slate-400 w-fit">
-              Shop Now
-            </Link>
-          </div> */}
-        </div>
-        <div className=" row-span-2">
-          <Link className="" href="/products?category=smartwatch">
-            <Image
-              src={galaxywatch1}
-              width={400}
-              height={400}
-              alt="headset-image"
-              className=" object-cover"
-            />
-          </Link>
-        </div>
-        <div className=" ">
-          <Link className="" href="/products?category=computer">
-            <Image
-              src={asus}
-              width={400}
-              height={400}
-              alt="headset-image"
-              className=" object-cover"
-            />
-          </Link>
-        </div>
-        <div className=" ">
-          <Link className="" href="/products?category=computer">
-            <Image
-              src={samsung}
-              width={400}
-              height={400}
-              alt="headset-image"
-              className=" object-cover"
+              alt="iPhone 15"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </Link>
         </div>
 
-        {/* <div className="">
-          <div className="">
+        {/* Secondary item - Smartwatch */}
+        <div className="bg-zinc-900 rounded-3xl relative overflow-hidden group col-span-1 lg:col-span-2 row-span-1 border border-white/10 shadow-xl">
+          <Link href="/products?category=smartwatch" className="block h-full w-full">
+            <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 to-transparent p-8 flex flex-col justify-center items-start">
+              <h3 className="text-2xl font-bold text-white mb-2">Galaxy Watch 6</h3>
+              <p className="text-gray-300 text-sm mb-4 max-w-[200px]">Advanced sleep coaching and heart monitoring.</p>
+              <span className="text-white font-medium group-hover:text-primary transition-colors">View Details &rarr;</span>
+            </div>
             <Image
-              src={headsetone}
-              width={400}
-              height={400}
-              alt="headset-image"
-              className=" object-cover"
+              src={galaxywatch1}
+              alt="Galaxy Watch"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105 origin-right"
             />
-          </div>
-        </div> */}
+          </Link>
+        </div>
+
+        {/* Small items - Computers */}
+        <div className="bg-zinc-900 rounded-3xl relative overflow-hidden group col-span-1 row-span-1 border border-white/10 shadow-lg min-h-[250px]">
+          <Link href="/products?category=computer" className="block h-full w-full">
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 to-transparent p-6 flex flex-col justify-end items-start">
+              <h3 className="text-xl font-bold text-white">Asus ZenBook</h3>
+              <p className="text-gray-400 text-xs mt-1">OLED Display</p>
+            </div>
+            <Image
+              src={asus}
+              alt="Asus Laptop"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </Link>
+        </div>
+
+        <div className="bg-zinc-900 rounded-3xl relative overflow-hidden group col-span-1 row-span-1 border border-white/10 shadow-lg min-h-[250px]">
+          <Link href="/products?category=computer" className="block h-full w-full">
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 to-transparent p-6 flex flex-col justify-end items-start">
+              <h3 className="text-xl font-bold text-white">Samsung Book</h3>
+              <p className="text-gray-400 text-xs mt-1">Galaxy Ecosystem</p>
+            </div>
+            <Image
+              src={samsung}
+              alt="Samsung PC"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );

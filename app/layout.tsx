@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-// import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/general/Navbar";
@@ -9,6 +9,7 @@ import { Inter } from "next/font/google";
 import { Montserrat, Roboto_Mono } from "next/font/google";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
   variable: "--font-roboto-mono",
@@ -48,16 +49,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        <div
-          className={`px-4 md:px-12 lg:px-20 ${robotoMono.variable} ${geistSans.variable} ${montserrat.variable} ${geistMono.variable} ${inter.variable} antialiased`}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${robotoMono.variable} ${geistSans.variable} ${montserrat.variable} ${geistMono.variable} ${inter.variable} antialiased bg-background text-foreground`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          {children}
-          <Toaster />
-          <Footer />
-        </div>{" "}
+          <Navbar />
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+            {children}
+            <Toaster />
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

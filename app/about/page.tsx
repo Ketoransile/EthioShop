@@ -2,38 +2,54 @@ import HomePageFeaturesList from "@/components/general/HomePageFeaturesList";
 import AboutPageCards from "@/components/modular/AboutPageCards";
 import { AboutPageCarousel } from "@/components/modular/AboutPageCarousel";
 import Image from "next/image";
+
 export default function AboutPage() {
   return (
-    <div className="flex flex-col gap-20 pt-20">
-      <div className="flex max-lg:flex-col  gap-64 ">
-        <div className="flex items-center justify-between">
-          <div className="flex flex-col gap-6">
-            <h1 className="text-7xl font-bold max-lg:text-center">Our Story</h1>
-            <div className="flex flex-col gap-2"></div>
-            <p className="text-md text-gray-600 max-lg:text-center">
-              Launced in 2015, EthioShop is Ethiopia&apos;s premier online
-              shopping makterplace with an active presense in Bangladesh.
-              Supported by wide range of tailored marketing, data and service
-              solutions, Exclusive has 10,500 sallers and 300 brands and serves
-              3 millioons customers across the region.{" "}
+    <div className="flex flex-col gap-24 pt-10">
+
+      {/* Hero Section / Our Story */}
+      <section className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <div className="flex flex-col gap-8 order-2 lg:order-1">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl font-black tracking-tighter">Our Story</h1>
+            <div className="h-1 w-20 bg-primary rounded-full" />
+          </div>
+
+          <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+            <p>
+              Launched in 2015, EthioShop is Ethiopia&apos;s premier online
+              shopping marketplace. Supported by a wide range of tailored marketing, data, and service
+              solutions, EthioShop serves 3 million customers across the region.
             </p>
-            <p className="text-md text-gray-600 max-lg:text-center">
-              EthioShop has more than 1 Million products to offer, growing at a
-              very fast. Exclusive offers a diverse assotment in categories
-              ranging from consumer.
+            <p>
+              With over 1 million products on offer and growing fast, we provide a diverse assortment
+              in categories ranging from consumer electronics to fashion, ensuring you find exactly what you need.
+            </p>
+            <p>
+              Our mission is to empower local sellers and connect them with millions of customers,
+              creating economic opportunity for everyone.
             </p>
           </div>
         </div>
-        <Image
-          src="/aboutPageImage.jpg"
-          width={800}
-          height={800}
-          alt="about-page-image"
-          className="-mx-20 rounded-l-xl max-lg:hidden"
-        />
-      </div>
+
+        <div className="relative order-1 lg:order-2 h-[400px] lg:h-[600px] w-full rounded-3xl overflow-hidden bg-muted shadow-2xl">
+          <Image
+            src="/aboutPageImage.jpg"
+            alt="Our Story"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      </section>
+
+      {/* Stats Cards */}
       <AboutPageCards />
+
+      {/* Team / Carousel */}
       <AboutPageCarousel />
+
+      {/* Features */}
       <HomePageFeaturesList />
     </div>
   );

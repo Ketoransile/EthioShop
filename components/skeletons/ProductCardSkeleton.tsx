@@ -1,39 +1,39 @@
 "use client";
 
-import { Skeleton } from "@/components/ui/skeleton"; // Using ShadCN's Skeleton (or create your own)
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const ProductCardSkeleton = () => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full h-full flex flex-col rounded-xl border border-border/50 bg-card">
       {/* Image Placeholder */}
-      <div className="relative py-6 flex items-center justify-center bg-gray-100">
-        <Skeleton className="h-40 w-40 rounded-none" />
+      <div className="relative aspect-square w-full overflow-hidden bg-muted/20 p-8 flex items-center justify-center">
+        <Skeleton className="h-full w-full rounded-lg bg-muted/50" />
       </div>
 
       {/* Content Placeholder */}
-      <div className="w-full flex flex-col pt-4 pb-4 gap-3">
+      <div className="flex flex-col gap-3 p-5 flex-1 justify-between">
         {/* Title */}
-        <Skeleton className="h-4 w-3/4" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-3/4 bg-muted" />
+          <Skeleton className="h-4 w-1/2 bg-muted" />
+        </div>
 
         {/* Rating Stars */}
         <div className="flex gap-1">
           {[...Array(5)].map((_, index) => (
-            <Skeleton key={index} className="h-3 w-3 rounded-full" />
+            <Skeleton key={index} className="h-3 w-3 rounded-full bg-muted" />
           ))}
         </div>
 
-        {/* Price */}
-        <div className="grid grid-cols-2 gap-y-2">
-          <Skeleton className="h-6 w-16" />
-          <Skeleton className="h-4 w-12 ml-auto" />
+        {/* Price & Button */}
+        <div className="flex flex-col gap-3 mt-2">
+          <div className="flex items-center gap-2">
+            <Skeleton className="h-6 w-20 bg-muted" />
+            <Skeleton className="h-4 w-12 bg-muted/50" />
+          </div>
+          <Skeleton className="h-10 w-full rounded-md bg-muted" />
         </div>
-
-        {/* Discount Badge (conditional) */}
-        <Skeleton className="h-4 w-8 ml-auto" />
       </div>
-
-      {/* Button Placeholder */}
-      <Skeleton className="h-10 w-full rounded-none" />
     </div>
   );
 };

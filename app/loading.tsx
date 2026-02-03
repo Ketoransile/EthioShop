@@ -6,12 +6,12 @@ export default function Loading() {
   const dots = [0, 1, 2, 3];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="flex items-center gap-3">
         {dots.map((index) => (
           <motion.div
             key={index}
-            className="w-3 h-3 bg-blue-600 dark:bg-blue-400 rounded-full"
+            className="w-3 h-3 bg-primary rounded-full"
             animate={{
               y: ["0%", "-60%", "0%"],
               scale: [1, 1.3, 1],

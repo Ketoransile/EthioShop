@@ -12,8 +12,7 @@ import NavbarSearch from "./NavbarSearch";
 import { Suspense, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
-// import { ToggleTheme } from "./ToggleTheme";
-// import { toast } from "sonner";
+import { ToggleTheme } from "./ToggleTheme";
 
 export const navLinks = [
   { name: "Home", href: "/" },
@@ -25,7 +24,6 @@ export const navLinks = [
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  // const router = useRouter();
   const { items } = useCartStore();
   const { wishItems } = useWishStore();
   const numberOfWishItems = wishItems.length;
@@ -35,45 +33,27 @@ export const Navbar = () => {
   );
 
   const { data: session } = authClient.useSession();
-  // const handleLogout = async () => {
-  //   await authClient.signOut({
-  //     fetchOptions: {
-  //       onSuccess: () => {
-  //         toast.success("Logout successful");
-  //         router.push("/login"); // redirect to login page
-  //       },
-  //     },
-  //   });
-  // };
+
   return (
-    <header
-      className="sticky top-0 z-50 
- bg-white 
-  border lg:border-gray-200 shadow-lg  px-4 md:px-12 lg:px-20
- 
-  "
-    >
-      <div className="container mx-auto px-4 sm:px-2 lg:px-8 ">
-        <div className="flex items-center justify-between h-16 md:h-20">
+    <header className="sticky top-0 z-50 w-full border-b border-border/10 bg-white/95 backdrop-blur-[12px] dark:bg-background/80 transition-colors duration-500">
+      <div className="container mx-auto px-4 md:px-12 lg:px-20">
+        <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <motion.span
-              className="text-lg lg:text-2xl font-bold max-lg:px-2"
+          <Link href="/" className="flex items-center gap-2 group">
+            <motion.div
+              className="text-2xl font-black tracking-tighter"
               whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              Ethio<span className="text-blue-600 ">shop</span>
-            </motion.span>
-            {/* <Image
-              src="/logo1.png"
-              width={200}
-              height={200}
-              className=""
-              alt="logo"
-            /> */}
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-violet-500 transition-all duration-300">
+                Ethio
+              </span>
+              <span className="text-foreground">Shop</span>
+            </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((navLink) => {
               const isActive =
                 pathname === navLink.href ||
@@ -82,92 +62,78 @@ export const Navbar = () => {
                 <Link
                   href={navLink.href}
                   key={navLink.name}
-                  className={`relative px-1 py-2 text-sm font-medium transition-colors ${
-                    isActive
-                      ? "text-blue-600"
-                      : "text-gray-700 hover:text-blue-600"
-                  }`}
+                  className="relative px-4 py-2 rounded-full text-sm font-semibold transition-colors text-foreground/80 hover:text-primary"
                 >
-                  {navLink.name}
                   {isActive && (
-                    <motion.span
-                      layoutId="nav-underline"
-                      className="absolute left-0 top-full h-0.5 w-full bg-blue-600"
-                      transition={{
-                        type: "spring",
-                        bounce: 0.2,
-                        duration: 0.6,
-                      }}
+                    <motion.div
+                      layoutId="navbar-indicator"
+                      className="absolute inset-0 bg-primary/10 rounded-full"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
+                  <span className="relative z-10">{navLink.name}</span>
                 </Link>
               );
             })}
           </nav>
 
           {/* Right Side Actions */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <Suspense
-              fallback={<div className="w-40 h-8 bg-gray-100 rounded-md" />}
-            >
-              <div className="relative border border-gray-200 p-2 px-4 rounded-full">
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="w-full max-w-[200px] transition-all duration-300 focus-within:max-w-[240px]">
+              <Suspense fallback={<div className="h-9 w-40 animate-pulse rounded-md bg-muted" />}>
                 <NavbarSearch />
-              </div>
-            </Suspense>
+              </Suspense>
+            </div>
 
-            {session ? (
-              <div className="flex items-center space-x-6">
-                <Link href="/wish-list" className="relative p-1">
-                  <IoMdHeartEmpty
-                    size={28}
-                    className="text-gray-700 hover:text-blue-600 transition-colors"
-                  />
-                  {numberOfWishItems > 0 && (
-                    <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                      {numberOfWishItems}
-                    </span>
-                  )}
-                </Link>
+            <div className="h-6 w-px bg-border/40 mx-2" />
 
-                <Link href="/cart" className="relative p-1">
-                  <IoCartOutline
-                    size={28}
-                    className="text-gray-700 hover:text-blue-600 transition-colors"
-                  />
-                  {numberOfCartItems > 0 && (
-                    <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                      {numberOfCartItems}
-                    </span>
-                  )}
-                </Link>
+            <div className="flex items-center gap-2">
+              <ToggleTheme />
 
-                <NavbarProfileDropdown />
-              </div>
-            ) : (
-              <div className="flex items-center space-x-3">
-                <Link href="/login">
-                  <Button
-                    variant="outline"
-                    className="border-gray-300 hover:bg-gray-50 cursor-pointer"
-                  >
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/sign-up">
-                  <Button
-                    variant="default"
-                    className="bg-brandBg hover:bg-blue-700 cursor-pointer"
-                  >
-                    Sign Up
-                  </Button>
-                </Link>
-              </div>
-            )}
+              {session ? (
+                <>
+                  <Link href="/wish-list" className="relative p-2 rounded-full hover:bg-muted/50 transition-colors text-muted-foreground hover:text-primary">
+                    <IoMdHeartEmpty size={22} />
+                    {numberOfWishItems > 0 && (
+                      <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-background">
+                        {numberOfWishItems}
+                      </span>
+                    )}
+                  </Link>
+
+                  <Link href="/cart" className="relative p-2 rounded-full hover:bg-muted/50 transition-colors text-muted-foreground hover:text-primary">
+                    <IoCartOutline size={22} />
+                    {numberOfCartItems > 0 && (
+                      <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-background">
+                        {numberOfCartItems}
+                      </span>
+                    )}
+                  </Link>
+
+                  <div className="ml-2">
+                    <NavbarProfileDropdown />
+                  </div>
+                </>
+              ) : (
+                <div className="flex items-center gap-3 ml-2">
+                  <Link href="/login">
+                    <Button variant="ghost" className="font-semibold text-muted-foreground hover:text-foreground">
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/sign-up">
+                    <Button className="rounded-full font-bold px-6 bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20">
+                      Sign Up
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none"
+            className="lg:hidden p-2 text-muted-foreground hover:text-primary"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -182,95 +148,66 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white border drop-shadow-lg  border-gray-200 rounded-none"
+            className="lg:hidden border-t border-border bg-background"
           >
-            <div className="flex flex-wrap items-center justify-between">
-              <div className="w-full px-4 py-3 space-y-4">
-                <div className="flex items-center justify-between lg:hidden">
-                  {" "}
-                  {session ? (
-                    <div className="w-full flex items-center  justify-between pt-4">
-                      <div className="flex items-center gap-4">
-                        <Link
-                          href="/wish-list"
-                          className="relative p-2"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          <IoMdHeartEmpty size={22} />
-                          {numberOfWishItems > 0 && (
-                            <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                              {numberOfWishItems}
-                            </span>
-                          )}
-                        </Link>
-                        <Link
-                          href="/cart"
-                          className="relative p-2"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          <IoCartOutline size={22} />
-                          {numberOfCartItems > 0 && (
-                            <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                              {numberOfCartItems}
-                            </span>
-                          )}
-                        </Link>
-                      </div>
-                      {/* <Button onClick={handleLogout} className="">
-                        Logout
-                      </Button> */}{" "}
-                      <NavbarProfileDropdown />
-                    </div>
-                  ) : (
-                    <div className="flex space-x-3 pt-4">
-                      <Link
-                        href="/login"
-                        className="flex-1"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        <Button variant="outline" className="w-full">
-                          Login
-                        </Button>
-                      </Link>
-                      <Link
-                        href="/sign-up"
-                        className="flex-1"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        <Button
-                          variant="default"
-                          className="w-full bg-blue-600 hover:bg-blue-700"
-                        >
-                          Sign Up
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-                <div className=" border p-2 px-4 border-gray-300 rounded-full">
-                  <Suspense
-                    fallback={
-                      <div className="w-full h-10 bg-gray-100 rounded-md" />
-                    }
-                  >
-                    <NavbarSearch />
-                  </Suspense>
-                </div>
+            <div className="container px-4 py-4 space-y-4">
+              <div className="mb-4">
+                <NavbarSearch />
+              </div>
+
+              <nav className="flex flex-col gap-1">
                 {navLinks.map((navLink) => (
                   <Link
                     href={navLink.href}
-                    key={navLink.href}
-                    className={`block px-3 py-2 rounded-md text-base font-medium ${
-                      pathname === navLink.href
-                        ? "bg-blue-50 text-blue-600"
-                        : "text-gray-700 hover:bg-gray-50"
-                    }`}
+                    key={navLink.name}
                     onClick={() => setIsMobileMenuOpen(false)}
+                    className={`px-4 py-3 text-sm font-semibold rounded-xl transition-all ${pathname === navLink.href
+                      ? "bg-primary/10 text-primary"
+                      : "hover:bg-muted text-foreground/80"
+                      }`}
                   >
                     {navLink.name}
                   </Link>
                 ))}
+              </nav>
+
+              <div className="flex items-center justify-between border-t border-border pt-4 mt-2">
+                <div className="flex items-center gap-4">
+                  <ToggleTheme />
+                  {session && (
+                    <>
+                      <Link href="/wish-list" className="relative p-2" onClick={() => setIsMobileMenuOpen(false)}>
+                        <IoMdHeartEmpty size={24} />
+                        {numberOfWishItems > 0 && (
+                          <span className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
+                            {numberOfWishItems}
+                          </span>
+                        )}
+                      </Link>
+                      <Link href="/cart" className="relative p-2" onClick={() => setIsMobileMenuOpen(false)}>
+                        <IoCartOutline size={24} />
+                        {numberOfCartItems > 0 && (
+                          <span className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
+                            {numberOfCartItems}
+                          </span>
+                        )}
+                      </Link>
+                    </>
+                  )}
+                </div>
+
+                {session ? (
+                  <NavbarProfileDropdown />
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                      <Button variant="ghost" size="sm">Login</Button>
+                    </Link>
+                    <Link href="/sign-up" onClick={() => setIsMobileMenuOpen(false)}>
+                      <Button size="sm" className="rounded-full px-6">Sign Up</Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

@@ -1,80 +1,76 @@
 export const dynamic = "force-dynamic";
 import Link from "next/link";
-import { TbRectangleVerticalFilled } from "react-icons/tb";
 import { ProductCard } from "../modular/ProductCard";
 import { Button } from "../ui/button";
 import connectDB from "@/lib/db";
 
-async function fetchHomePageProducts() {
+// Define simplified Interface
+interface Product {
+  _id: string;
+  title: string;
+  thumbnailImage: string;
+  price?: { value: number };
+  listPrice?: { value: number };
+  stars: number;
+  highResolutionImages?: string[];
+  [key: string]: unknown;
+}
+
+interface ApiResponse {
+  status: number;
+  data: Product[] | null;
+}
+
+async function fetchHomePageProducts(): Promise<ApiResponse> {
   try {
     await connectDB();
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const response = await fetch(`${baseUrl}/api/products/list?limit=0`, {
       method: "GET",
       cache: "no-store",
-      // next: { revalidate: revalidate },
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
     });
-    if (!response.ok) {
-      const status = response.status;
-      console.error(`Failed to fetch products. Status: ${status}`);
-      return {
-        status,
-        data: null,
-        error: `Request failed with status ${status}`,
-      };
-    }
-    const data = await response.json();
-    // console.log("data from backnd converted using ,json method is :", data);
-    return data;
-  } catch (error) {
-    console.error("Fetch error:", error);
-    return {
-      status: 500,
-      data: null,
-      error: error.message || "Unknown error",
-    };
+    if (!response.ok) return { status: response.status, data: null };
+    return await response.json();
+  } catch {
+    return { status: 500, data: null };
   }
 }
 
 export const HomePageProductsList = async () => {
   const data = await fetchHomePageProducts();
-  // console.log("Data from hompaegproduct list \n", data.length);
-  // if (data.status === 404 || data.status === 500 || data.data === null) {
-  //   return <div className="">No Products found</div>;
-  // }
+
   if (data.status !== 200 || !data.data || data.data.length === 0) {
-    return <div className="">No Products found</div>;
+    return null;
   }
 
   const products = data.data;
-  console.log("Total products:", products.length);
 
   return (
-    <div className="flex flex-col gap-4 pt-20">
-      <div className="flex gap-2 items-center">
-        <TbRectangleVerticalFilled size={24} className="text-blue-500" />
-        <h1 className="text-sm text-blue-500 font-bold">Our Products</h1>
+    <div className="flex flex-col gap-12 py-16 px-4 md:px-0">
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-4 bg-primary rounded-sm" />
+          <span className="font-bold text-primary">Our Products</span>
+        </div>
+        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Explore Our Collection</h2>
       </div>
-      <h1 className="text-2xl lg:text-4xl font-semibold">
-        Explore our products
-      </h1>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 gap-y-16 items-center justify-between pt-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {products.slice(15, 25).map((product) => (
-          // <Suspense fallback={<ProductCardSkeleton />} key={product._id}>
-          <ProductCard product={product} key={product.title} />
-          // </Suspense>
+          <ProductCard product={product} key={product._id || product.title} />
         ))}
       </div>
-      <Link href="/products" className="pt-10 self-center">
-        <Button className="bg-brandBg w-fit text-white px-20 py-6 my-10 cursor-pointer">
-          View All Products
-        </Button>
-      </Link>
+
+      <div className="flex justify-center pt-8">
+        <Link href="/products">
+          <Button size="lg" className="px-8 min-w-[200px] font-semibold text-lg h-12">
+            View All Products
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };
