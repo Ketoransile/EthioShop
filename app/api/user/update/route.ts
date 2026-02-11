@@ -8,7 +8,7 @@ export async function POST() {
   const session = await auth.api.getSession({
     headers: await headers(), // you need to pass the headers object.
   });
-  console.log("Session from update user route is ", session);
+  // console.log("Session from update user route is ", session);
   const userId = session?.user?.id;
   if (!userId) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });

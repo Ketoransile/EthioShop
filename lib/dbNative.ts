@@ -202,7 +202,7 @@ async function connectDBNative() {
       serverSelectionTimeoutMS: 30000, // 30 seconds timeout
     });
     await client.connect();
-    console.log("Connected to MongoDB (Native Driver)");
+    // console.log("Connected to MongoDB (Native Driver)");
     globalAny.mongoClient = client; // Cache for hot-reloading in development
   }
   return client.db(); // ✅ Return the database instance

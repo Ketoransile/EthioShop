@@ -74,7 +74,7 @@ export async function GET(req: NextRequest) {
         break;
     }
 
-    console.log("filters in api route are: ", filters);
+    // console.log("filters in api route are: ", filters);
 
     const products = await Product.find(filters)
       .sort(sort)
@@ -98,13 +98,13 @@ export async function GET(req: NextRequest) {
       pagination:
         limit !== Infinity
           ? {
-              totalProducts,
-              totalPages,
-              currentPage: page,
-              productsPerPage: limit,
-              hasNextPage: page < totalPages,
-              hasPreviousPage: page > 1,
-            }
+            totalProducts,
+            totalPages,
+            currentPage: page,
+            productsPerPage: limit,
+            hasNextPage: page < totalPages,
+            hasPreviousPage: page > 1,
+          }
           : undefined,
     });
   } catch (error) {

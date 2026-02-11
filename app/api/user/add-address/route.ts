@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
   try {
     const headers = request.headers;
     const userId = headers?.get("x-user-id");
-    console.log("User ID from add-address route handler is:", userId);
+    // console.log("User ID from add-address route handler is:", userId);
     if (!userId) {
       return NextResponse.json({
         message: "Unauthorized requests",

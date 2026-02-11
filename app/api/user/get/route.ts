@@ -11,9 +11,9 @@ export async function GET() {
       headers: await headers(),
     });
 
-    console.log("session from get user route iss: ", session);
-    console.log("Session:", session);
-    console.log("Looking for user ID:", session?.user?.id);
+    // console.log("session from get user route iss: ", session);
+    // console.log("Session:", session);
+    // console.log("Looking for user ID:", session?.user?.id);
 
     const userId = session?.user?.id;
     if (!userId) {
@@ -21,7 +21,7 @@ export async function GET() {
     }
     const user = await User.findOne({ _id: userId }).lean();
 
-    console.log("USer from get user api is", user);
+    // console.log("USer from get user api is", user);
     if (!user) {
       return NextResponse.json(
         {

@@ -291,7 +291,7 @@ export default function MyAccountPage() {
           return;
         }
         const accounts = await authClient.listAccounts();
-        console.log("accounts list from profile page is", accounts);
+        // console.log("accounts list from profile page is", accounts);
         if (!accounts || accounts.data == null || accounts.data.length === 0) {
           return;
         }

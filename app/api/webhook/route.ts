@@ -50,7 +50,7 @@ export async function POST(req: Request) {
       order.stripeSessionId = session.id; // Store the Stripe session ID for future reference
       await order.save();
 
-      console.log("Order updated:", order);
+      // console.log("Order updated:", order);
 
       return NextResponse.json({ message: "Webhook handled successfully" });
     } catch (dbError) {

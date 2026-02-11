@@ -35,9 +35,9 @@ export default async function Page({
 }) {
   // Don't await the data fetching function
   const { productId } = await params;
-  console.log("productid is: ", productId);
+  // console.log("productid is: ", productId);
   const response = await getProduct(productId);
-  console.log("Response Object:", response);
+  // console.log("Response Object:", response);
   const product = response.data; // Extract the product data from the response object
   if (
     response.status === 404 ||

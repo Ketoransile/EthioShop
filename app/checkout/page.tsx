@@ -76,13 +76,13 @@ export default function CheckoutPage() {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(form.formState.errors);
-      console.log("Form submission triggered");
+      // console.log(form.formState.errors);
+      // console.log("Form submission triggered");
       setLoading(true);
       // Do something with the form values.
       // ✅ This will be type-safe and validated.  console.log("Submitting form...");
-      console.log("shadcn form values", values);
-      console.log("Submitting form...");
+      // console.log("shadcn form values", values);
+      // console.log("Submitting form...");
       const formData = new FormData();
 
       // Append all fields

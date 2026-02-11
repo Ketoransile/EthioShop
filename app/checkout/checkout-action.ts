@@ -93,7 +93,7 @@ export const checkoutAction = async (formData: FormData) => {
   if (!itemsJson) throw new Error("No items in cart");
 
   const items = JSON.parse(itemsJson.toString());
-  console.log("Items from checkout-action.ts file is : ", items);
+  // console.log("Items from checkout-action.ts file is : ", items);
   const fullName = formData.get("fullName")?.toString();
   const email = formData.get("email")?.toString();
   const address = formData.get("address")?.toString();

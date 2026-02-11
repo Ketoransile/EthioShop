@@ -62,7 +62,7 @@ export default function SignUp() {
             toast.success("Account created successfully! Redirecting...");
           },
           onError: (ctx) => {
-            console.log("Full error context:", ctx);
+            // console.log("Full error context:", ctx);
 
             const errorMessage =
               ctx.error?.message ||

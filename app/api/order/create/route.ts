@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
   try {
     const headers = request.headers;
     const userId = headers?.get("x-user-id");
-    console.log("User Id from create order route is ", userId);
+    // console.log("User Id from create order route is ", userId);
     if (!userId) {
       return NextResponse.json({
         message: "Unauthorized",

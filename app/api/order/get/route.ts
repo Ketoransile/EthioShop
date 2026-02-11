@@ -11,7 +11,7 @@ export async function GET() {
     const session = await auth.api.getSession({
       headers: await headers(),
     });
-    console.log("session from route/ts: ", session);
+    // console.log("session from route/ts: ", session);
     const userId = session?.user?.id;
     if (!userId)
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });

@@ -8,7 +8,7 @@ export async function fetchUserData() {
     credentials: "include",
   });
 
-  console.log("Response from fetchUserData.ts is", response);
+  // console.log("Response from fetchUserData.ts is", response);
 
   if (!response.ok) {
     const status = response.status;
@@ -21,6 +21,6 @@ export async function fetchUserData() {
   }
 
   const data = await response.json();
-  console.log("Data from fetchUserData:", data);
+  // console.log("Data from fetchUserData:", data);
   return data;
 }
