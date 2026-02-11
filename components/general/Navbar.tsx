@@ -35,9 +35,9 @@ export const Navbar = () => {
   const { data: session } = authClient.useSession();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/10 bg-white/95 backdrop-blur-[12px] dark:bg-background/80 transition-colors duration-500">
-      <div className="container mx-auto px-4 md:px-12 lg:px-20">
-        <div className="flex h-16 items-center justify-between md:h-20">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-white dark:bg-black">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <motion.div
@@ -110,9 +110,7 @@ export const Navbar = () => {
                     )}
                   </Link>
 
-                  <div className="ml-2">
-                    <NavbarProfileDropdown />
-                  </div>
+                  <NavbarProfileDropdown />
                 </>
               ) : (
                 <div className="flex items-center gap-3 ml-2">
@@ -132,12 +130,17 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 text-muted-foreground hover:text-primary"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <ToggleTheme />
+            <button
+              className="p-2.5 rounded-lg text-muted-foreground hover:text-primary hover:bg-muted/50 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -148,10 +151,10 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden border-t border-border bg-background"
+            className="lg:hidden border-t border-border bg-background/95 backdrop-blur-md"
           >
-            <div className="container px-4 py-4 space-y-4">
-              <div className="mb-4">
+            <div className="container px-4 py-4 space-y-3">
+              <div className="pb-2">
                 <NavbarSearch />
               </div>
 
@@ -161,7 +164,7 @@ export const Navbar = () => {
                     href={navLink.href}
                     key={navLink.name}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`px-4 py-3 text-sm font-semibold rounded-xl transition-all ${pathname === navLink.href
+                    className={`px-4 py-3.5 text-sm font-semibold rounded-xl transition-all ${pathname === navLink.href
                       ? "bg-primary/10 text-primary"
                       : "hover:bg-muted text-foreground/80"
                       }`}
@@ -172,22 +175,21 @@ export const Navbar = () => {
               </nav>
 
               <div className="flex items-center justify-between border-t border-border pt-4 mt-2">
-                <div className="flex items-center gap-4">
-                  <ToggleTheme />
+                <div className="flex items-center gap-3">
                   {session && (
                     <>
-                      <Link href="/wish-list" className="relative p-2" onClick={() => setIsMobileMenuOpen(false)}>
-                        <IoMdHeartEmpty size={24} />
+                      <Link href="/wish-list" className="relative p-2.5 rounded-full hover:bg-muted/50 transition-colors text-muted-foreground hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                        <IoMdHeartEmpty size={22} />
                         {numberOfWishItems > 0 && (
-                          <span className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
+                          <span className="absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white ring-2 ring-background">
                             {numberOfWishItems}
                           </span>
                         )}
                       </Link>
-                      <Link href="/cart" className="relative p-2" onClick={() => setIsMobileMenuOpen(false)}>
-                        <IoCartOutline size={24} />
+                      <Link href="/cart" className="relative p-2.5 rounded-full hover:bg-muted/50 transition-colors text-muted-foreground hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                        <IoCartOutline size={22} />
                         {numberOfCartItems > 0 && (
-                          <span className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
+                          <span className="absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white ring-2 ring-background">
                             {numberOfCartItems}
                           </span>
                         )}
@@ -201,10 +203,10 @@ export const Navbar = () => {
                 ) : (
                   <div className="flex items-center gap-2">
                     <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button variant="ghost" size="sm">Login</Button>
+                      <Button variant="ghost" size="sm" className="font-semibold">Login</Button>
                     </Link>
                     <Link href="/sign-up" onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button size="sm" className="rounded-full px-6">Sign Up</Button>
+                      <Button size="sm" className="rounded-full font-bold px-6 bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20">Sign Up</Button>
                     </Link>
                   </div>
                 )}

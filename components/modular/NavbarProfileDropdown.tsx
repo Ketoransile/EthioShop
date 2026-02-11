@@ -39,41 +39,30 @@ export function NavbarProfileDropdown() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        {/* <button className="bg-brandBg hover:bg-blue-400 cursor-pointer p-2 border-r-0 border-l-0 border-t-0 border-b-0 rounded-full ">
-          {" "}
-          <FiUser size={24} className="text-white" />
-        </button> */}
-        <LuUser size={28} className="cursor-pointer" />
+        <button className="p-2 rounded-full hover:bg-muted/50 transition-colors text-muted-foreground hover:text-primary cursor-pointer">
+          <LuUser size={24} />
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-56 mt-4 ml-20"
-        // collisionPadding={16}
-        // avoidCollisions={true}
+        className="w-56"
+        align="end"
+        sideOffset={8}
       >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {/* <DropdownMenuItem asChild>
-            <Link
-              href="/profile"
-              className="flex items-center gap-4 cursor-pointer"
-            >
-              <FiUser size={24} />
-              <p>My Profile</p>
-            </Link>
-          </DropdownMenuItem> */}
           <DropdownMenuItem asChild>
             <Link
               href="/my-orders"
               className="flex items-center gap-4 cursor-pointer"
             >
-              <LuShoppingBag size={24} />
-              <p>My Order</p>
+              <LuShoppingBag size={20} />
+              <p>My Orders</p>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/" className="flex items-center gap-4 cursor-pointer">
-              <IoHomeOutline size={24} />
+              <IoHomeOutline size={20} />
               <p>Home</p>
             </Link>
           </DropdownMenuItem>
@@ -83,9 +72,9 @@ export function NavbarProfileDropdown() {
         <DropdownMenuItem asChild>
           <Button
             onClick={handleLogout}
-            className="-mx-1 flex items-start justify-start gap-4 cursor-pointer bg-transparent text-black border-none w-full "
+            className="-mx-1 flex items-start justify-start gap-4 cursor-pointer bg-transparent text-foreground hover:text-foreground border-none w-full"
           >
-            <TbLogout2 size={24} />
+            <TbLogout2 size={20} />
             <p>Logout</p>
           </Button>
         </DropdownMenuItem>

@@ -25,7 +25,7 @@ export const heroSliderData = [
     description: "Experience the future of smartphones with the new iPhone 15.",
     images: [iphone, iphone1],
     link: "/products?category=smartphone",
-    color: "from-zinc-900 to-zinc-800", // Custom gradient for this slide
+    color: "from-blue-950 via-indigo-950 to-violet-950",
   },
   {
     id: 2,

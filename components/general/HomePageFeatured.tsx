@@ -19,12 +19,18 @@ export const HomePageFeatured = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[600px] h-auto lg:h-[600px]">
         {/* Main large item - iPhone */}
-        <div className="bg-black text-white rounded-3xl relative overflow-hidden group col-span-1 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2 border border-white/10 shadow-2xl">
+        <div className="text-white rounded-3xl relative overflow-hidden group col-span-1 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2 border border-white/10 shadow-2xl">
           <Link href="/products?category=smartphone" className="block h-full w-full">
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end items-start transition-opacity duration-300">
+            {/* Colored tint overlay on top of image */}
+            <div className="absolute inset-0 z-[2] bg-gradient-to-br from-indigo-900/60 via-violet-900/40 to-purple-900/50 mix-blend-multiply" />
+            {/* Radial glow accents */}
+            <div className="absolute -top-20 -right-20 w-80 h-80 bg-violet-500/20 rounded-full blur-3xl z-[3]" />
+            <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-blue-500/15 rounded-full blur-3xl z-[3]" />
+            {/* Text content */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-indigo-950/90 via-transparent to-indigo-950/30 p-8 flex flex-col justify-end items-start">
               <h3 className="text-3xl font-bold mb-2">iPhone 15 Pro Max</h3>
-              <p className="text-gray-300 mb-4 line-clamp-2 max-w-sm">Titanium design. A17 Pro chip. The most powerful iPhone ever built.</p>
-              <Button variant="link" className="text-white p-0 h-auto underline decoration-2 underline-offset-4 hover:text-primary transition-colors">
+              <p className="text-gray-200 mb-4 line-clamp-2 max-w-sm">Titanium design. A17 Pro chip. The most powerful iPhone ever built.</p>
+              <Button variant="link" className="text-white p-0 h-auto underline decoration-2 underline-offset-4 hover:text-violet-300 transition-colors">
                 Shop Collection
               </Button>
             </div>

@@ -14,21 +14,21 @@ export default function SuccessPage() {
     clearCart();
   }, [clearCart]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 ">
-      <div className=" flex flex-col items-center gap-6 justify-center bg-white p-12 rounded-xl shadow-lg max-w-2xl mx-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background">
+      <div className="flex flex-col items-center gap-6 justify-center bg-card text-card-foreground p-12 rounded-xl shadow-lg border border-border max-w-2xl mx-4">
         <Image
           src="/checklist.png"
           width={64}
           height={64}
           alt="checklist-image"
         />
-        <h1 className="text-4xl font-bold  text-center border-b border-b-gray-300 pb-4">
+        <h1 className="text-4xl font-bold text-center border-b border-b-border pb-4">
           Thank you for Your Order!
         </h1>
         <p>Your order has been confirmed and will be shipped shortly.</p>
         <div className="space-y-2">
           {orderNumber && (
-            <p className="text-gray-600 flex items-center space-x-5">
+            <p className="text-muted-foreground flex items-center space-x-5">
               <span>Order number</span>
               <span className="font-mono text-sm text-brandBg">
                 {orderNumber}
@@ -37,7 +37,7 @@ export default function SuccessPage() {
           )}
         </div>
         <div className="space-y-4">
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             A confirmation email has been sent to your registered email address
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -48,7 +48,7 @@ export default function SuccessPage() {
               <Link href="/">Continue Shopping</Link>
             </Button>
           </div>
-        </div>{" "}
+        </div>
       </div>
     </div>
   );
