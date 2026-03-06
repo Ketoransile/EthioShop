@@ -65,15 +65,15 @@ export default function MyOrders() {
   }, []);
 
   return (
-    <div className="my-orders pt-20 w-full">
+    <div className="my-orders pt-20 w-full dark:bg-background dark:text-foreground">
       <h1 className="text-2xl font-bold pb-4 max-lg:text-center">
-        My <span className="text-brandBg">Orders</span>
+        My <span className="text-brandBg dark:text-primary">Orders</span>
       </h1>
       {loading && <p>Loading orders...</p>} {/* Show loading state */}
       {error && <p style={{ color: "red" }}>{error}</p>}{" "}
       {/* Show error message */}
       {orders && !loading && !error ? (
-        <div className="w-full flex flex-col gap-4  bg-gray-100 rounded-2xl min-h-screen p-10">
+        <div className="w-full flex flex-col gap-4 bg-gray-100 dark:bg-card rounded-2xl min-h-screen p-10">
           {orders.map((order) => (
             <div key={order._id}>
               <OrderOverviewCard order={order} />
