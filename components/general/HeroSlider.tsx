@@ -94,7 +94,7 @@ export const HeroSlider = () => {
                           </Button>
                         </Link>
                         <Link href={slide.link}>
-                          <Button size="lg" variant="outline" className="rounded-full border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg backdrop-blur-sm">
+                          <Button size="lg" variant="outline" className="rounded-full !border-white/30 !text-white !bg-transparent hover:!bg-white/10 px-8 py-6 text-lg backdrop-blur-sm">
                             Learn More
                           </Button>
                         </Link>
